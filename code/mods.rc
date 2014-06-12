@@ -1,0 +1,1070 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "modsres.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MAP_ACQUIRE DIALOG  0, 0, 183, 52
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Acquire UVW Mapping"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,126,7,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,126,24,50,14
+    CONTROL         "Acquire Relative",IDC_ACQUIRE_REL,"Button",BS_AUTORADIOBUTTON | WS_GROUP,21,11,68,10
+    CONTROL         "Acquire Absolute",IDC_ACQUIRE_ABS,"Button",BS_AUTORADIOBUTTON,21,26,69,10
+END
+
+IDD_TEXTURELAYERSMAP DIALOG  0, 0, 217, 156
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Set Number",IDC_TL_SETNUM,46,22,44,12
+    RTEXT           "1000:",IDC_TL_LABEL1,7,53,17,8
+    RTEXT           "Number of Layers:",IDC_STATIC,90,24,60,8
+    LTEXT           "1",IDC_TL_NUMMAPS,152,24,19,9,SS_SUNKEN
+    RTEXT           "1000:",IDC_TL_LABEL2,7,71,17,8
+    RTEXT           "1000:",IDC_TL_LABEL3,7,88,17,8
+    RTEXT           "1000:",IDC_TL_LABEL4,7,104,17,8
+    RTEXT           "1000:",IDC_TL_LABEL5,7,121,17,8
+    RTEXT           "1000:",IDC_TL_LABEL6,7,138,17,8
+    CONTROL         "Custom1",IDC_TL_TEX1,"CustButton",WS_TABSTOP,68,49,94,14
+    CONTROL         "Custom1",IDC_TL_TEX2,"CustButton",WS_TABSTOP,68,66,94,14
+    CONTROL         "Custom1",IDC_TL_TEX3,"CustButton",WS_TABSTOP,68,83,94,14
+    CONTROL         "Custom1",IDC_TL_TEX4,"CustButton",WS_TABSTOP,68,100,94,14
+    CONTROL         "Custom1",IDC_TL_TEX5,"CustButton",WS_TABSTOP,68,117,94,14
+    CONTROL         "Custom1",IDC_TL_TEX6,"CustButton",WS_TABSTOP,68,134,94,14
+    CONTROL         "",IDC_TLON1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,193,52,9,8
+    CONTROL         "",IDC_TLON2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,193,70,9,8
+    CONTROL         "",IDC_TLON3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,193,86,9,8
+    CONTROL         "",IDC_TLON4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,193,103,9,8
+    CONTROL         "",IDC_TLON5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,193,120,9,8
+    CONTROL         "",IDC_TLON6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,193,137,9,8
+    SCROLLBAR       IDC_TL_SCROLL,204,37,8,115,SBS_VERT
+    GROUPBOX        "",IDC_STATIC,3,33,211,120
+    CTEXT           "Group",IDC_MM_B,163,39,29,8
+    CTEXT           "Texture",IDC_MM_A,93,39,29,8
+    CONTROL         "",IDC_SPIN_CH1,"SpinnerControl",0x0,184,51,7,10
+    CONTROL         "",IDC_SPIN_CH2,"SpinnerControl",0x0,184,69,7,10
+    CONTROL         "",IDC_SPIN_CH3,"SpinnerControl",0x0,184,85,7,10
+    CONTROL         "",IDC_SPIN_CH4,"SpinnerControl",0x0,184,102,7,10
+    CONTROL         "",IDC_SPIN_CH5,"SpinnerControl",0x0,184,119,7,10
+    CONTROL         "",IDC_SPIN_CH6,"SpinnerControl",0x0,184,136,7,10
+    CONTROL         "",IDC_EDIT_CH1,"CustEdit",WS_TABSTOP,164,51,20,10
+    CONTROL         "",IDC_EDIT_CH2,"CustEdit",WS_TABSTOP,164,69,20,10
+    CONTROL         "",IDC_EDIT_CH3,"CustEdit",WS_TABSTOP,164,85,20,10
+    CONTROL         "",IDC_EDIT_CH4,"CustEdit",WS_TABSTOP,164,102,20,10
+    CONTROL         "",IDC_EDIT_CH5,"CustEdit",WS_TABSTOP,164,119,20,10
+    CONTROL         "",IDC_EDIT_CH6,"CustEdit",WS_TABSTOP,164,136,20,10
+    CTEXT           "Attenuation",IDC_MM_A2,26,39,40,8
+    CONTROL         "",IDC_TL_BACK1,"CustButton",WS_TABSTOP,26,49,14,14
+    CONTROL         "",IDC_TL_BACK2,"CustButton",WS_TABSTOP,26,66,14,14
+    CONTROL         "",IDC_TL_BACK3,"CustButton",WS_TABSTOP,26,83,14,14
+    CONTROL         "",IDC_TL_BACK4,"CustButton",WS_TABSTOP,26,100,14,14
+    CONTROL         "",IDC_TL_BACK5,"CustButton",WS_TABSTOP,26,117,14,14
+    CONTROL         "",IDC_TL_BACK6,"CustButton",WS_TABSTOP,26,134,14,14
+    CONTROL         "",IDC_TL_MODAT1,"CustButton",WS_TABSTOP,42,49,24,14
+    CONTROL         "",IDC_TL_MODAT2,"CustButton",WS_TABSTOP,42,66,24,14
+    CONTROL         "",IDC_TL_MODAT3,"CustButton",WS_TABSTOP,42,83,24,14
+    CONTROL         "",IDC_TL_MODAT4,"CustButton",WS_TABSTOP,42,100,24,14
+    CONTROL         "",IDC_TL_MODAT5,"CustButton",WS_TABSTOP,42,117,24,14
+    CONTROL         "",IDC_TL_MODAT6,"CustButton",WS_TABSTOP,42,134,24,14
+    CONTROL         "A",IDC_TLC_ABOUT,"CustButton",WS_TABSTOP,198,4,15,14
+    CTEXT           "T e x t u r e   L a y e r s  C o m p o s i t e",IDC_TKU_ABOUT,32,8,144,8
+    GROUPBOX        "",IDC_STATIC,3,0,211,19
+END
+
+IDD_TL_SETNUM DIALOG  0, 0, 187, 46
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Number of Layers"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_TL_NUMMAPS,"CustEdit",WS_TABSTOP,77,17,29,10
+    DEFPUSHBUTTON   "OK",IDOK,131,6,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,131,23,50,14
+    CONTROL         "",IDC_TL_NUMMAPSSPIN,"SpinnerControl",0x0,107,17,7,10
+    RTEXT           "Number of Layers:",IDC_STATIC,13,17,63,8
+END
+
+IDD_MM_SETNUM DIALOG  0, 0, 187, 46
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Number of Channels"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_MM_NUMCH,"CustEdit",WS_TABSTOP,77,17,29,10
+    DEFPUSHBUTTON   "OK",IDOK,131,6,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,131,23,50,14
+    CONTROL         "",IDC_MM_NUMCHSPIN,"SpinnerControl",0x0,107,17,7,10
+    RTEXT           "Number of Channels:",IDC_STATIC,4,17,72,8
+END
+
+IDD_NURBS DIALOG  0, 0, 108, 55
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "NURBS Objects are currently\nnot supported by this\nTexture Layers Beta Build.\nTo avoid unpredictable results\nplease remove Texture Layers\nmodifier.",IDC_STATIC,2,3,102,49
+END
+
+IDD_SM_UTILE DIALOG  0, 0, 370, 164
+STYLE DS_SETFONT | DS_CENTER | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Control Curve"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_SM_VIEW,"UTileView",0x0,7,23,356,113
+    CONTROL         "",IDC_SM_TOOLBAR,"CustToolbar",WS_TABSTOP,7,7,356,13
+    CONTROL         "",IDC_CC_X,"CustEdit",WS_TABSTOP,33,147,31,10
+    CONTROL         "",IDC_CC_XSPIN,"SpinnerControl",0x0,65,147,7,10
+    CONTROL         "",IDC_CC_Y,"CustEdit",WS_TABSTOP,105,147,31,10
+    CONTROL         "",IDC_CC_YSPIN,"SpinnerControl",0x0,137,147,7,10
+    LTEXT           "X:",IDC_CC_XLABEL,21,148,10,9
+    LTEXT           "Y:",IDC_CC_YLABEL,89,148,10,9
+END
+
+IDC_TL_SETNUMPOINTS DIALOGEX 0, 0, 159, 74
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Set Free Form Mapping Dimensions"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TL_GMROW,"CustEdit",WS_TABSTOP,55,18,29,10
+    CONTROL         "",IDC_TL_GMCOL,"CustEdit",WS_TABSTOP,55,31,29,10
+    CONTROL         "Keep Gizmo Shape",IDC_TL_SHAPE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,44,74,12,WS_EX_RIGHT
+    CONTROL         "Reset Tiling && Offset",IDC_TL_RESTO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,9,56,84,12,WS_EX_RIGHT
+    DEFPUSHBUTTON   "OK",IDOK,102,37,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,102,53,50,14
+    CONTROL         "",IDC_TL_GMCOL_SPIN,"SpinnerControl",0x0,85,31,7,10
+    RTEXT           "U Columns:",IDC_STATIC,9,20,41,8
+    CONTROL         "",IDC_TL_GMROW_SPIN,"SpinnerControl",0x0,85,18,7,10
+    RTEXT           "V Rows:",IDC_STATIC,9,32,41,8
+    GROUPBOX        "Set Number of Points",IDC_STATIC,7,7,91,60
+END
+
+IDD_TL_SETUVWATT DIALOG  0, 0, 278, 151
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "UVW Attenuation"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,221,110,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,221,130,50,14
+    CONTROL         "",IDC_ATT_CEN_SPIN,"SpinnerControl",0x0,131,106,7,10
+    CONTROL         "",IDC_ATT_CEN,"CustEdit",WS_TABSTOP,104,106,26,10
+    CONTROL         "",IDC_ATT_START_SPIN,"SpinnerControl",0x0,131,117,7,10
+    CONTROL         "",IDC_ATT_START,"CustEdit",WS_TABSTOP,104,117,26,10
+    CONTROL         "",IDC_ATT_OFFSET_SPIN,"SpinnerControl",0x0,131,128,7,10
+    CONTROL         "",IDC_ATT_OFFSET,"CustEdit",WS_TABSTOP,104,128,26,10
+    CONTROL         "",IDC_ATT_V1_SPIN,"SpinnerControl",0x0,202,109,7,10
+    CONTROL         "",IDC_ATT_V1,"CustEdit",WS_TABSTOP,175,109,26,10
+    CONTROL         "",IDC_ATT_V2_SPIN,"SpinnerControl",0x0,202,121,7,10
+    CONTROL         "",IDC_ATT_V2,"CustEdit",WS_TABSTOP,175,121,26,10
+    LTEXT           "Center:",IDC_STATIC,77,108,27,8
+    LTEXT           "Start:",IDC_STATIC,77,119,27,8
+    LTEXT           "Offset:",IDC_STATIC,77,130,27,8
+    LTEXT           "Outside:",IDC_STATIC,145,110,27,8
+    LTEXT           "Inside:",IDC_STATIC,145,123,27,8
+    CONTROL         "",IDC_ATT_GRAPH,"Static",SS_BLACKFRAME | SS_SUNKEN,21,6,250,80
+    LTEXT           "1.0",IDC_STATIC,7,9,11,8
+    LTEXT           "0.0",IDC_STATIC,7,75,11,8
+    GROUPBOX        "Angles",IDC_STATIC,71,98,71,47
+    GROUPBOX        "Attenuation Values",IDC_STATIC,141,98,74,47
+    LTEXT           "180.0",IDC_STATIC,22,87,20,8
+    LTEXT           "0.0",IDC_STATIC,255,87,13,8
+    LTEXT           "90.0",IDC_STATIC,136,88,14,8
+    GROUPBOX        "Normals",IDC_STATIC,23,98,49,47
+    CONTROL         "VW",IDC_VW,"Button",BS_AUTORADIOBUTTON,33,119,26,10
+    CONTROL         "WU",IDC_WU,"Button",BS_AUTORADIOBUTTON,33,130,26,10
+    CONTROL         "UV",IDC_UV,"Button",BS_AUTORADIOBUTTON,33,108,26,10
+END
+
+IDD_MAPOPTIONS DIALOG  0, 0, 137, 145
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Texture Layers Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Close",IDC_CLOSE,44,127,50,14
+    GROUPBOX        "Texture Layers Options:",IDC_STATIC,3,4,131,33
+    CONTROL         "Display gizmo for all channels.",IDC_DO_GIZMO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,15,106,9
+    GROUPBOX        "Selection Sets",IDC_STATIC,3,39,131,43
+    PUSHBUTTON      "Get All Edge Sel Sets from Object",IDC_TLO_SS_EDGES,7,49,124,14
+    PUSHBUTTON      "Get All Face Sel Sets from Object",IDC_TLO_SS_FACES,7,64,124,14
+    GROUPBOX        "Mapping Channel UV",IDC_STATIC,3,84,131,39
+    LTEXT           "UVW Channel : ",IDC_STATIC,7,94,79,8
+    PUSHBUTTON      "Save UVW",IDC_TLO_SAVE_CH_UVW,44,105,50,14
+    CONTROL         "",IDC_TLO_CHANNEL,"CustEdit",WS_TABSTOP,92,93,29,10
+    CONTROL         "",IDC_TLO_CHANNEL_SPIN,"SpinnerControl",0x0,122,93,7,10
+    CONTROL         "Compact UV Verts",IDC_TLO_COMPACT_TVERTS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,26,106,9
+END
+
+IDD_ATT DIALOG  0, 0, 217, 236
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_ATT_GROUP_MAP,"CustEdit",WS_TABSTOP,136,61,29,10
+    CONTROL         "Use Face Selection",IDC_ATT_FACE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,261,114,90,10
+    CONTROL         "",IDC_ATT_MOD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,61,8,10
+    CONTROL         "Don't use",IDC_ATT_UVNOT,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,17,92,44,8
+    CONTROL         "",IDC_ATTCEN_EDIT,"CustEdit",WS_TABSTOP,93,194,29,10
+    CONTROL         "",IDC_ATTSTR_EDIT,"CustEdit",WS_TABSTOP,93,206,29,10
+    CONTROL         "",IDC_ATTOFF_EDIT,"CustEdit",WS_TABSTOP,93,217,29,10
+    CONTROL         "",IDC_ATTOUT_EDIT,"CustEdit",WS_TABSTOP,168,196,29,10
+    CONTROL         "",IDC_ATTIN_EDIT,"CustEdit",WS_TABSTOP,168,210,29,10
+    LTEXT           "Map",IDC_STATIC_MAP,24,32,20,8
+    CONTROL         "Custom1",IDC_TINT_MAP,"CustButton",WS_TABSTOP,50,29,112,12
+    CONTROL         "",IDC_MAPON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,168,30,8,10
+    CONTROL         "",IDC_ATT_GROUP_MAP_SPIN,"SpinnerControl",0x0,166,61,7,10
+    CONTROL         "",IDC_ATTCEN_SPIN,"SpinnerControl",0x0,123,194,7,10
+    RTEXT           "Center:",IDC_STATIC,67,194,24,9
+    CONTROL         "",IDC_ATTSTR_SPIN,"SpinnerControl",0x0,123,206,7,10
+    RTEXT           "Start:",IDC_STATIC,67,206,24,9
+    CONTROL         "",IDC_ATTOFF_SPIN,"SpinnerControl",0x0,123,217,7,10
+    RTEXT           "Offset:",IDC_STATIC,67,217,24,9
+    CONTROL         "",IDC_ATTIN_SPIN,"SpinnerControl",0x0,198,210,7,10
+    RTEXT           "Inside:",IDC_STATIC,138,211,28,9
+    CONTROL         "",IDC_ATTOUT_SPIN,"SpinnerControl",0x0,198,196,7,10
+    RTEXT           "Outside:",IDC_STATIC,138,197,28,9
+    CONTROL         "",IDC_ATT_GRAPH,"Static",SS_BLACKFRAME | SS_SUNKEN,17,105,193,72
+    GROUPBOX        "Angle",IDC_STATIC,60,185,75,44
+    GROUPBOX        "Values",IDC_STATIC,134,185,75,44
+    LTEXT           "1.0",IDC_STATIC,5,108,10,8
+    LTEXT           "0.0",IDC_STATIC,5,166,12,8
+    LTEXT           "180.0",IDC_STATIC,14,177,19,8
+    LTEXT           "0.0",IDC_STATIC,199,177,14,8
+    LTEXT           "90.0",IDC_STATIC,106,177,19,8
+    GROUPBOX        "UVW Normal Attenuation",IDC_STATIC,3,79,211,154
+    GROUPBOX        "Normal",IDC_STATIC,17,185,44,44
+    GROUPBOX        "Attenuation",IDC_STATIC,3,49,211,27
+    GROUPBOX        "",IDC_STATIC,3,18,211,30
+    CONTROL         "Top",IDC_ATT_TOP,"Button",BS_AUTORADIOBUTTON,74,92,28,8
+    CONTROL         "Bottom",IDC_ATT_BOTT,"Button",BS_AUTORADIOBUTTON,121,92,36,8
+    CONTROL         "Curve",IDC_ATT_CURVE,"Button",BS_AUTORADIOBUTTON,177,92,33,8
+    CONTROL         "UV",IDC_UV,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,25,196,24,8
+    CONTROL         "VW",IDC_VW,"Button",BS_AUTORADIOBUTTON,25,206,24,8
+    CONTROL         "WU",IDC_WU,"Button",BS_AUTORADIOBUTTON,25,217,24,8
+    LTEXT           "Texture Layers Modifier Group : ",IDC_STATIC,31,62,102,8
+    CONTROL         "A",IDC_TLA_ABOUT,"CustButton",WS_TABSTOP,198,4,15,14
+    CTEXT           "T e x t u r e   L a y e r s   A t t e n u a t i o n",IDC_TKU_ABOUT,32,8,144,8
+    GROUPBOX        "",IDC_STATIC,3,0,211,19
+END
+
+IDD_MAP_ACQUIRETL DIALOG  0, 0, 183, 65
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Acquire Texture Layers Mapping"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,124,25,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,124,42,50,14
+    CONTROL         "Acquire Relative",IDC_ACQUIRE_RELTL,"Button",BS_AUTORADIOBUTTON | WS_GROUP,15,21,68,10
+    CONTROL         "Acquire Absolute",IDC_ACQUIRE_ABSTL,"Button",BS_AUTORADIOBUTTON,15,33,69,10
+    CONTROL         "Copy animation",IDC_AQ_ANI,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,45,98,11
+    CONTROL         "",IDC_MM_ORCH,"CustEdit",WS_TABSTOP,70,8,29,10
+    CONTROL         "",IDC_MM_ORCHSPIN,"SpinnerControl",0x0,100,8,7,10
+    RTEXT           "TexLay Channel:",IDC_STATIC,12,9,56,8
+    GROUPBOX        "",IDC_STATIC,7,0,169,58
+END
+
+IDD_TL_MAIN DIALOG  0, 0, 108, 238
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Custom1",IDC_MM_TOOLBAR,"CustToolbar",WS_TABSTOP,2,124,104,18
+    CONTROL         "",IDC_TL_GROUP_NAME,"CustEdit",WS_TABSTOP,5,153,97,12
+    LISTBOX         IDC_TL_GROUPS_MENU,2,22,104,101,NOT LBS_NOTIFY | LBS_OWNERDRAWVARIABLE | LBS_HASSTRINGS | WS_VSCROLL
+    COMBOBOX        IDC_TLM_TYPES,5,168,97,161,CBS_DROPDOWNLIST | CBS_OWNERDRAWVARIABLE | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_TL_LENGTH,"CustEdit",WS_TABSTOP,49,198,32,10
+    CONTROL         "",IDC_TL_WIDTH,"CustEdit",WS_TABSTOP,49,209,32,10
+    CONTROL         "",IDC_TL_HEIGHT,"CustEdit",WS_TABSTOP,49,220,32,10
+    CONTROL         "",IDC_TL_LENGTH_SPIN,"SpinnerControl",0x0,81,198,7,10
+    CONTROL         "",IDC_TL_WIDTH_SPIN,"SpinnerControl",0x0,81,209,7,10
+    CONTROL         "",IDC_TL_HEIGHT_SPIN,"SpinnerControl",0x0,81,220,7,10
+    LTEXT           "Length:",IDC_TXT_LENGTH,17,200,27,8
+    LTEXT           "Width:",IDC_TXT_WIDTH,17,211,27,8
+    LTEXT           "Height:",IDC_TXT_HEIGHT,17,221,27,8
+    CONTROL         "",IDC_TL_MAPCH,"CustEdit",WS_TABSTOP,72,184,21,10
+    CONTROL         "",IDC_TL_MAPCH_SPIN,"SpinnerControl",0x0,94,184,7,10
+    LTEXT           "Mapping Channel:",IDC_TXT_HEIGHT2,7,185,59,8
+    GROUPBOX        "Active Group",IDC_STATIC,2,144,104,90
+    CONTROL         "A",IDC_TL_ABOUT,"CustButton",WS_TABSTOP,89,4,15,14
+    CTEXT           "T e x t u r e   L a y e r s",IDC_TKU_ABOUT,6,8,79,8
+    GROUPBOX        "",IDC_STATIC,3,0,102,19
+END
+
+IDD_TL_MAPPING DIALOG  0, 0, 108, 80
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Mapping:",IDC_STATIC,2,0,104,77
+END
+
+IDD_TL_TILING DIALOGEX 0, 0, 108, 194
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_TL_US,"CustEdit",WS_TABSTOP,21,16,29,10
+    CONTROL         "",IDC_TL_UO,"CustEdit",WS_TABSTOP,60,16,29,10
+    CONTROL         "",IDC_TL_VS,"CustEdit",WS_TABSTOP,21,27,29,10
+    CONTROL         "",IDC_TL_VO,"CustEdit",WS_TABSTOP,60,27,29,10
+    CONTROL         "",IDC_TL_WS,"CustEdit",WS_TABSTOP,21,38,29,10
+    CONTROL         "",IDC_TL_WO,"CustEdit",WS_TABSTOP,60,38,29,10
+    CONTROL         "On",IDC_TL_ATTON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,62,24,10
+    CONTROL         "",IDC_TL_ATT,"CustEdit",WS_TABSTOP,69,60,21,10
+    CONTROL         "",IDC_TL_AUS,"CustEdit",WS_TABSTOP,22,80,29,10
+    CONTROL         "",IDC_TL_AUO,"CustEdit",WS_TABSTOP,62,80,29,10
+    CONTROL         "",IDC_TL_AVS,"CustEdit",WS_TABSTOP,22,91,29,10
+    CONTROL         "",IDC_TL_AVO,"CustEdit",WS_TABSTOP,62,91,29,10
+    CONTROL         "",IDC_TL_AWS,"CustEdit",WS_TABSTOP,22,102,29,10
+    CONTROL         "",IDC_TL_AWO,"CustEdit",WS_TABSTOP,62,102,29,10
+    CONTROL         "",IDC_TL_RUV,"CustEdit",WS_TABSTOP,62,113,29,10
+    CONTROL         "",IDC_TL_MOVE_U,"CustEdit",WS_TABSTOP,16,145,20,10
+    CONTROL         "",IDC_TL_ROT_U,"CustEdit",WS_TABSTOP,45,145,20,10
+    CONTROL         "",IDC_TL_SCALE_U,"CustEdit",WS_TABSTOP,74,145,20,10
+    CONTROL         "",IDC_TL_MOVE_V,"CustEdit",WS_TABSTOP,16,156,20,10
+    CONTROL         "",IDC_TL_ROT_V,"CustEdit",WS_TABSTOP,45,156,20,10
+    CONTROL         "",IDC_TL_SCALE_V,"CustEdit",WS_TABSTOP,74,156,20,10
+    CONTROL         "",IDC_TL_MOVE_W,"CustEdit",WS_TABSTOP,16,167,20,10
+    CONTROL         "",IDC_TL_ROT_W,"CustEdit",WS_TABSTOP,45,167,20,10
+    CONTROL         "",IDC_TL_SCALE_W,"CustEdit",WS_TABSTOP,74,167,20,10
+    CONTROL         "XForm Attenuation",IDC_TL_XF_TO_ATT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,179,78,10
+    GROUPBOX        "Attenuation : ",IDC_STATIC,1,51,106,75
+    CONTROL         "",IDC_TL_ATT_SPIN,"SpinnerControl",0x0,91,60,7,10
+    RTEXT           "Overall:",IDC_STATIC,39,62,28,8
+    CONTROL         "",IDC_TL_AUS_SPIN,"SpinnerControl",0x0,52,80,7,10
+    LTEXT           "U:",IDC_STATIC,8,81,12,8
+    CONTROL         "",IDC_TL_AUO_SPIN,"SpinnerControl",0x0,92,80,7,10
+    CONTROL         "",IDC_TL_AVS_SPIN,"SpinnerControl",0x0,52,91,7,10
+    LTEXT           "V:",IDC_STATIC,8,91,12,8
+    CONTROL         "",IDC_TL_AVO_SPIN,"SpinnerControl",0x0,92,91,7,10
+    CONTROL         "",IDC_TL_AWS_SPIN,"SpinnerControl",0x0,52,102,7,10
+    LTEXT           "W:",IDC_STATIC,8,102,12,8
+    CONTROL         "",IDC_TL_AWO_SPIN,"SpinnerControl",0x0,92,102,7,10
+    CTEXT           "Start",IDC_STATIC,25,71,28,8
+    CTEXT           "Offset",IDC_STATIC,65,71,28,8
+    CONTROL         "",IDC_TL_RUV_SPIN,"SpinnerControl",0x0,92,113,7,10
+    RTEXT           "UV Roundness:",IDC_STATIC,7,114,53,8
+    GROUPBOX        "Tiling : ",IDC_STATIC,1,1,106,50
+    CONTROL         "",IDC_TL_US_SPIN,"SpinnerControl",0x0,51,16,7,10
+    LTEXT           "U:",IDC_STATIC,5,16,12,8
+    CONTROL         "",IDC_TL_UO_SPIN,"SpinnerControl",0x0,90,16,7,10
+    CONTROL         "",IDC_TL_VS_SPIN,"SpinnerControl",0x0,51,27,7,10
+    LTEXT           "V:",IDC_STATIC,5,27,12,8
+    CONTROL         "",IDC_TL_VO_SPIN,"SpinnerControl",0x0,90,27,7,10
+    CONTROL         "",IDC_TL_WS_SPIN,"SpinnerControl",0x0,51,38,7,10
+    LTEXT           "W:",IDC_STATIC,5,38,12,8
+    CONTROL         "",IDC_TL_WO_SPIN,"SpinnerControl",0x0,90,38,7,10
+    CTEXT           "Tile",IDC_STATIC,24,6,28,8
+    CTEXT           "Offset",IDC_STATIC,63,6,28,8
+    CONTROL         "",IDC_TL_MOVE_U_SPIN,"SpinnerControl",0x0,37,145,7,10
+    LTEXT           "U:",IDC_STATIC,5,145,10,8
+    CONTROL         "",IDC_TL_SCALE_U_SPIN,"SpinnerControl",0x0,95,145,7,10
+    CONTROL         "",IDC_TL_MOVE_V_SPIN,"SpinnerControl",0x0,37,156,7,10
+    LTEXT           "V:",IDC_STATIC,5,156,10,8
+    CONTROL         "",IDC_TL_SCALE_V_SPIN,"SpinnerControl",0x0,95,156,7,10
+    CONTROL         "",IDC_TL_MOVE_W_SPIN,"SpinnerControl",0x0,37,167,7,10
+    LTEXT           "W:",IDC_STATIC,5,167,10,8
+    CONTROL         "",IDC_TL_SCALE_W_SPIN,"SpinnerControl",0x0,95,167,7,10
+    CTEXT           "Move",IDC_STATIC,16,135,20,8
+    CTEXT           "Scale",IDC_STATIC,74,135,20,8
+    GROUPBOX        "X Form : ",IDC_STATIC,2,127,104,64
+    CONTROL         "",IDC_TL_ROT_U_SPIN,"SpinnerControl",0x0,66,145,7,10
+    CONTROL         "",IDC_TL_ROT_V_SPIN,"SpinnerControl",0x0,66,156,7,10
+    CONTROL         "",IDC_TL_ROT_W_SPIN,"SpinnerControl",0x0,66,167,7,10
+    CTEXT           "Rotate",IDC_STATIC,44,135,26,8
+END
+
+IDD_TL_TOOLS DIALOG  0, 0, 108, 96
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Fit",IDC_MAP_FIT,"CustButton",WS_GROUP | WS_TABSTOP,8,19,44,12
+    CONTROL         "Center",IDC_MAP_CENTER,"CustButton",WS_TABSTOP,56,19,44,12
+    CONTROL         "Bitmap Fit",IDC_MAP_BITMAPFIT,"CustButton",WS_TABSTOP,8,33,44,12
+    CONTROL         "Normal Align",IDC_MAP_NORMALALIGN,"CustButton",WS_TABSTOP,56,33,44,12
+    CONTROL         "View Align",IDC_MAP_VIEWALIGN,"CustButton",WS_TABSTOP,8,48,44,12
+    CONTROL         "Region Fit",IDC_MAP_FITREGION,"CustButton",WS_TABSTOP,56,48,44,12
+    CONTROL         "Reset",IDC_MAP_RESET,"CustButton",WS_TABSTOP,8,62,44,12
+    CONTROL         "Acquire",IDC_MAP_ACQUIRE,"CustButton",WS_TABSTOP,56,62,44,12
+    CONTROL         "X",IDC_TLO_X,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,18,9,18,10
+    CONTROL         "Y",IDC_TLO_Y,"Button",BS_AUTORADIOBUTTON,44,9,18,10
+    CONTROL         "Z",IDC_TLO_Z,"Button",BS_AUTORADIOBUTTON,70,9,18,10
+    GROUPBOX        "Alignment:",IDC_STATIC_ALIG,1,0,106,93
+    CONTROL         "Align to Selection",IDC_MAP_ALIGN_SEL,"CustButton",WS_GROUP | WS_TABSTOP,8,77,92,12
+END
+
+IDD_TL_SPLINE DIALOGEX 0, 0, 108, 117
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TLS_PICK_NODE,"CustButton",WS_TABSTOP,9,9,66,14
+    PUSHBUTTON      "Reset",IDC_TLS_RESET_SPLINE,76,9,22,14
+    CONTROL         "Reverse",IDC_TLS_REVERSE,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,9,37,44,11,WS_EX_STATICEDGE
+    CONTROL         "Normalize",IDC_TLS_NORMALIZED,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,55,37,44,11,WS_EX_STATICEDGE
+    PUSHBUTTON      "U Tile",IDC_TLS_UTILE,7,97,30,12
+    PUSHBUTTON      "U Offset",IDC_TLS_ANGLE,39,97,30,12
+    PUSHBUTTON      "W Tile",IDC_TLS_RADIUS,71,97,30,12
+    GROUPBOX        "Spline Mapping",IDC_STATIC_SM,1,0,106,115
+    GROUPBOX        "Normals",IDC_STATIC_SM_NOR,5,49,98,37
+    GROUPBOX        "Local Curves",IDC_STATIC_SM_LC,5,87,98,25
+    CONTROL         "Plane",IDC_TLS_PLANE,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,7,59,30,12
+    CONTROL         "Field",IDC_TLS_FIELD,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE,71,59,30,12
+    CONTROL         "Center",IDC_TLS_CENTER,"Button",BS_AUTORADIOBUTTON | BS_PUSHLIKE,39,59,30,12
+    CONTROL         "Belt Type",IDC_TLS_BELT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,9,26,46,10
+    CONTROL         "",IDC_TLS_NORMAL_START,"CustEdit",WS_TABSTOP,62,74,29,10
+    CONTROL         "",IDC_TLS_NORMAL_START_SPIN,"SpinnerControl",0x0,92,74,7,10
+    RTEXT           "Start : ",IDC_STATIC,7,75,53,8
+END
+
+IDD_TL_FREE DIALOGEX 0, 0, 108, 78
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Set Number of Points",IDC_TLF_SET_NUM_POINTS,18,26,72,14
+    CONTROL         "All U",IDC_TLF_ALLU,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,23,42,29,14
+    CONTROL         "All V",IDC_TLF_ALLV,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,55,42,29,14
+    CONTROL         "Shape to Surface",IDC_TLF_PICK_SURFACE,"CustButton",WS_TABSTOP,22,59,64,14
+    CTEXT           "99×99",IDC_TLF_NUMPOINTS,71,9,28,13,SS_CENTERIMAGE,WS_EX_CLIENTEDGE
+    GROUPBOX        "Free Form Mapping",IDC_STATIC_FFM,1,0,106,76
+    LTEXT           "Number of points:",IDC_FFM_TEXT,9,12,61,10
+END
+
+IDD_DUMMY DIALOG  0, 0, 217, 18
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Not Authorized...!",IDC_STATIC,81,5,56,8
+END
+
+IDD_TL_PELT DIALOG  0, 0, 108, 116
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_TLP_K,"CustEdit",WS_TABSTOP,58,22,29,10
+    CONTROL         "",IDC_TLP_K_SPIN,"SpinnerControl",0x0,88,22,7,10
+    RTEXT           "Rigidity :",IDC_STATIC_FS,20,24,36,9
+    CONTROL         "",IDC_TLP_B,"CustEdit",WS_TABSTOP,58,33,29,10
+    CONTROL         "",IDC_TLP_B_SPIN,"SpinnerControl",0x0,88,33,7,10
+    RTEXT           "Stability :",IDC_STATIC,20,35,36,9
+    CONTROL         "",IDC_TLP_FRAME,"CustEdit",WS_TABSTOP,58,45,29,10
+    CONTROL         "",IDC_TLP_FRAME_SPIN,"SpinnerControl",0x0,88,45,7,10
+    RTEXT           "Layout Size :",IDC_STATIC,10,46,46,9
+    CONTROL         "",IDC_TLP_ITER,"CustEdit",WS_TABSTOP,58,56,29,10
+    CONTROL         "",IDC_TLP_ITER_SPIN,"SpinnerControl",0x0,88,56,7,10
+    RTEXT           "Iterations :",IDC_STATIC,20,57,36,9
+    PUSHBUTTON      "Edit Pelt Layout",IDC_TLP_EDIT_FRAME,7,69,93,12
+    GROUPBOX        "UV Pelt:",IDC_STATIC,2,2,104,111
+    PUSHBUTTON      "Reset Pelt Layout",IDC_TLP_RESET_FRAME,7,83,93,12
+    CONTROL         "Move Borders to Layout",IDC_TLP_MOVE_BORDER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,11,91,10
+    PUSHBUTTON      "Save Layout",IDC_TLP_SAVE_FRAME,7,97,45,12
+    PUSHBUTTON      "Load Layout",IDC_TLP_LOAD_FRAME,55,97,45,12
+END
+
+IDD_PELT_DLG DIALOG  0, 0, 257, 217
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_VISIBLE | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Edit Pelt Layout"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Custom1",IDC_PELT_TOOLBAR,"CustToolbar",WS_TABSTOP,4,2,249,17
+    CONTROL         "Custom1",IDC_PELT_VIEW,"UVPeltViewClass",WS_TABSTOP,4,21,249,192
+END
+
+IDD_TL_FRAME DIALOG  0, 0, 108, 28
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_TLFR_PICK_FRAME,"CustButton",WS_TABSTOP,9,10,90,14
+    GROUPBOX        "Frame Mapping",IDC_STATIC_FFM,1,0,106,27
+END
+
+IDD_TL_DATA DIALOG  0, 0, 108, 30
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Load UVW",IDC_TLD_LOAD,55,10,47,15
+    PUSHBUTTON      "Save UVW",IDC_TLD_SAVE,6,10,47,15
+    GROUPBOX        "",IDC_STATIC,2,2,104,26
+END
+
+IDD_IO_DLG DIALOG  0, 0, 172, 165
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Save Texture Layers Groups"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Save",IDOK,115,89,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,115,105,50,14
+    LISTBOX         IDC_GROUPS,7,17,98,102,LBS_MULTIPLESEL | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "",IDC_STATIC,7,117,158,42
+    LTEXT           "NOTE : Save Groups doesn't save all the information in UV Pelt groups . To save UV Pelt groups, please use the Save Pelt Layout tool in the Pelt rollup.",IDC_STATIC,13,124,146,33
+    LTEXT           "Select the groups to be saved:",IDC_STATIC,7,7,98,8
+END
+
+IDD_ABOUT_DLG DIALOGEX 0, 0, 290, 319
+STYLE DS_SETFONT | WS_POPUP | WS_VISIBLE
+EXSTYLE WS_EX_APPWINDOW
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         233,IDC_STATIC,"Static",SS_BITMAP,0,0,290,319
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "modsres.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_MAP_ACQUIRE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 45
+    END
+
+    IDD_NURBS, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 104
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 52
+    END
+
+    IDD_SM_UTILE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 363
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 157
+    END
+
+    IDC_TL_SETNUMPOINTS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 152
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 67
+    END
+
+    IDD_TL_SETUVWATT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 271
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 144
+    END
+
+    IDD_MAPOPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        RIGHTMARGIN, 134
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 141
+    END
+
+    IDD_MAP_ACQUIRETL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 58
+    END
+
+    IDD_TL_MAIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 106
+        BOTTOMMARGIN, 237
+    END
+
+    IDD_TL_MAPPING, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 106
+    END
+
+    IDD_TL_TILING, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 106
+        TOPMARGIN, 2
+    END
+
+    IDD_TL_TOOLS, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 106
+        TOPMARGIN, 2
+    END
+
+    IDD_TL_SPLINE, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 106
+        TOPMARGIN, 2
+    END
+
+    IDD_TL_FREE, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 107
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 76
+    END
+
+    IDD_DUMMY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 14
+    END
+
+    IDD_TL_PELT, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 106
+        TOPMARGIN, 2
+    END
+
+    IDD_PELT_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 253
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 213
+    END
+
+    IDD_TL_FRAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 106
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 27
+    END
+
+    IDD_TL_DATA, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 106
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 28
+    END
+
+    IDD_IO_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 165
+        TOPMARGIN, 7
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,0
+ PRODUCTVERSION 2,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "CompanyName", "Mankua  space-time solutions"
+            VALUE "FileDescription", "Texture Layers"
+            VALUE "FileVersion", "1.04"
+            VALUE "InternalName", "TexLay"
+            VALUE "LegalCopyright", "Copyright © Diego Andrés Castaño Alt 1999"
+            VALUE "OriginalFilename", "TexLay.dlm"
+            VALUE "ProductName", "Texture Layers"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BACKS               BITMAP                  "back1.bmp"
+IDB_BACKS_MASK          BITMAP                  "back_mas.bmp"
+IDB_UTILETOOL           BITMAP                  "unwrapto.bmp"
+IDB_MASK_UTILETOOL      BITMAP                  "mask_unw.bmp"
+IDB_MANKUA_LOGO         BITMAP                  "mankua.bmp"
+IDB_PELT                BITMAP                  "bitmap1.bmp"
+IDB_PELT_MASK           BITMAP                  "bmp00002.bmp"
+IDB_BULBS               BITMAP                  "bulbs.bmp"
+IDB_BULBS_MASK          BITMAP                  "bulbs_ma.bmp"
+IDB_TL_TOOLBAR          BITMAP                  "bmp00003.bmp"
+IDB_TL_TOOLBAR_MASK     BITMAP                  "bmp00004.bmp"
+IDB_MAP_TYPES           BITMAP                  "map_type.bmp"
+IDB_MAP_TYPES_MASK      BITMAP                  "bmp00005.bmp"
+IDB_16BUTS              BITMAP                  "bmp16but.bmp"
+IDB_16BUTS_MASK         BITMAP                  "bmp00001.bmp"
+IDB_TEXLAY_ATT          BITMAP                  "texlay_a.bmp"
+IDB_TEXLAY_ATT_MASK     BITMAP                  "bmp00006.bmp"
+IDB_DCP                 BITMAP                  "dcp.bmp"
+IDB_TEXLAY2_ABOUT       BITMAP                  "TexLay2About.bmp"
+IDB_TEXLAY2_ABOUT_DEMO  BITMAP                  "TexLay2AboutDemo.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_MOVE_X              CURSOR                  "cur00004.cur"
+IDC_MOVE_Y              CURSOR                  "cursor2.cur"
+IDC_ZOOM                CURSOR                  "cur00003.cur"
+IDC_PAN                 CURSOR                  "cur00005.cur"
+IDC_ADD_POINT           CURSOR                  "cur00007.cur"
+IDC_DEL_POINT           CURSOR                  "cur00006.cur"
+IDC_DRAGCURSOR          CURSOR                  "cursor1.cur"
+IDC_SCALE_X             CURSOR                  "scale_x.cur"
+IDC_SCALE_Y             CURSOR                  "scale_y.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_DC_TEXLAYERS        "Texture Layers"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_MM_CLASS            "TexLay"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DC_TEXTURELAYERS    "Texture Layers"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DC_APPARATUS        "Gizmo"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DC_PARAMETERS       "Parameters"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_RB_LENGTH           "Length"
+    IDS_DC_MULTICOMP        "Texture Layers Composite"
+    IDS_DC_TLPARAMS         "Texture Layers Parameters"
+    IDS_DC_PICKSPLINE       "Pick Spline"
+    IDC_TL_UP               "Up"
+    IDC_TL_PAGEUP           "Page Up"
+    IDC_TL_DOWN             "Down"
+    IDC_TL_PAGEDOWN         "Page Down"
+    IDS_MM_LAYNUM           "Layer"
+    IDS_DC_DEFTL            "Texture Layers 2.0 Beta ( v 1.04 ) 12-03-2003"
+    IDS_ILLEGALSPLINE       "Illegal Spline"
+    IDS_SPLINEMAPPING       "Spline Mapping"
+    IDS_PICKSPLINE          "Pick Spline"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_RB_WIDTH            "Width"
+    IDS_RB_HEIGHT           "Height"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CC_MOVE             "Move"
+    IDS_CC_ADD              "Add Point"
+    IDS_CC_DEL              "Delete Point"
+    IDS_CC_RESET            "Reset"
+    IDS_CC_BEZ              "Bezier-Smooth"
+    IDS_CC_CORN             "Bezier-Corner"
+    IDS_CC_LINE             "Corner"
+    IDS_CC_PAN              "Pan"
+    IDS_CC_ZE               "Zoom Extents"
+    IDS_CC_ZHE              "Zoom Horizontal Extents"
+    IDS_CC_ZVE              "Zoom Vertical Extents"
+    IDS_CC_ZOOM             "Zoom"
+    IDS_CC_ZOOMX            "Zoom Horizontaly"
+    IDS_CC_ZOOMY            "Zoom Vertically"
+    IDS_TL_FILE             "Texture Layers files(*.tl)"
+    IDS_TL_SAVECURTITLE     "Save Current Channel"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TL_FILEEXISTS       "%s already exists.\nDo you want to replace it?"
+    IDS_SAVE_CUR            "Save Current Channel"
+    IDS_SAVE_ALL            "Save Channels"
+    IDS_LOAD_ALL            "Load Channels"
+    IDS_LOAD_CUR            "Load Replace Current Channel"
+    IDS_LOAD_MERGE          "Merge Channels"
+    IDS_CUT                 "Cut Channel"
+    IDS_COPY                "Copy Channel"
+    IDS_PASTE               "Paste Channel"
+    IDS_PREVIEW             "Preview Channel in\nViewport"
+    IDS_DC_PICKFFG          "Pick Grid or Surface"
+    IDS_DC_CONTPOINTS       "FFM Points"
+    IDS_MTL_PICKSPLINE      "Pick Spline"
+    IDS_TL_NONE             "None"
+    IDS_TL_SAVEALLTITLE     "Save All Channels"
+    IDS_TL_MERGETITLE       "Merge Channels"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TL_REPLACEALLTITLE  "Load and Replace All Channels"
+    IDS_TL_REPLACECURTITLE  "Load and Replace Current Current"
+    IDS_BACK_ALL            "No Fade\nClick and hold for more options."
+    IDS_BACK_TOP            "Shows Texture only in UVW TOP\nClick and hold for more options."
+    IDS_BACK_BOT            "Shows Texture only in UVW Bottom\nClick and hold for more options"
+    IDS_BACK_GRF            "UVW Normal attenuation/nClick and hold for more options"
+    IDS_PREVIEW_CURR        "Apply Mapping to current channel"
+    IDS_PREVIEW_ALL         "Apply mapping to all channels"
+    IDS_UVWPROY_CLASS       "UVWGroup"
+    IDS_DC_UVWPROY          "TexLay UVW Projector"
+    IDS_DC_SELFACES         "Select Faces"
+    IDS_DC_MOUSE_ADD        "Add Faces to Selection"
+    IDS_DC_MOUSE_SUBTRACT   "Remove faces from selection"
+    IDS_DC_MOUSE_SELECTTRI  "Select triangle faces"
+    IDS_DC_MOUSE_SELECTFACE "Select polygon faces"
+    IDS_DC_ATTMAP           "TL Att"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DC_ATTPARAMS        "Attenuation Map Parameters"
+    IDS_DS_RED              "Red"
+    IDS_DS_GREEN            "Green"
+    IDS_DS_BLUE             "Blue"
+    IDS_JW_MAP1             "Map 1"
+    IDS_JW_MAP1ENABLE       "Map 1 Enable"
+    IDS_DS_COLOR1           "Color 1"
+    IDS_DS_COLOR2           "Color2"
+    IDS_DS_COLOR3           "Color 3"
+    IDS_DS_MAP              "Map"
+    IDS_DC_ATTMAP_CDESC     "Texture Layers Attenuation"
+    IDS_DC_MOUSE_EDGES_ADD  "Add Edges to Selection"
+    IDS_DC_CANAL            "Canal"
+    IDS_MAPTYPE_PLANAR      "Planar"
+    IDS_MAPTYPE_CYL         "Cylindrical"
+    IDS_MAPTYPE_CYLCAP      "Cylindrical Cap"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_MAPTYPE_SPHERE      "Spherical"
+    IDS_MAPTYPE_SHRINK      "Shrink Wrap"
+    IDS_MAPTYPE_BOX         "Box"
+    IDS_MAPTYPE_FACE        "Face"
+    IDS_MAPTYPE_XYZ         "Object XYZ"
+    IDS_MAPTYPE_SPLINE      "Spline"
+    IDS_MAPTYPE_FFM         "Free Form"
+    IDS_MAPTYPE_DATA        "UVW Data"
+    IDS_MAPTYPE_DATA1       "UVW Type 1"
+    IDS_MAPTYPE_DATA2       "Type 2"
+    IDS_MAPTYPE_DATA3       "Type 3"
+    IDS_MAPTYPE_DATA4       "Type 4"
+    IDS_MAPTYPE_DATA5       "Type 5"
+    IDS_DC_POINT            "Point %d"
+    IDS_DC_INVEC            "In Vector %d"
+    IDS_DC_OUTVEC           "Out Vector %d"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_GRIDMESH_CLASS      "UVWGrid"
+    IDS_DC_HEIGHT           "Height:"
+    IDS_DC_RADIUS           "Radius:"
+    IDS_PARAMETERS          "Parameters"
+    IDS_SIMPLE              "Simple"
+    IDS_TL_TILE_U           "Tile U"
+    IDS_TL_TILE_V           "Tile V"
+    IDS_TL_TILE_W           "Tile W"
+    IDS_TL_OFFSET_U         "Offset U"
+    IDS_TL_OFFSET_V         "Offset V"
+    IDS_TL_OFFSET_W         "Offset W"
+    IDS_TL_LENGTH           "Length"
+    IDS_TL_WIDTH            "Width"
+    IDS_TL_HEIGHT           "Height"
+    IDS_TL_ATT_ON           "Attenuation"
+    IDS_TL_ATT_U_S          "Att U Start"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TL_ATT_U_O          "Att U Offset"
+    IDS_TL_ATT_V_S          "Att V Start"
+    IDS_TL_ATT_V_O          "Att V Offset"
+    IDS_TL_ATT_W_S          "Att W Start"
+    IDS_TL_ATT_W_O          "Att W Offset"
+    IDS_TL_ATT_RUV          "Att Fillet"
+    IDS_TL_FFM_THRESH       "FFM Threshold"
+    IDS_TL_MODNAME          "Texture Layers"
+    IDS_TL_SELECTIMAGE      "Select Image"
+    IDS_TL_PARAMETERS       "Parameters"
+    IDS_TLF_PICK_SURFACE    "Shape to Surface"
+    IDS_NOT_AUTH            "Not Authorized."
+    IDS_ATT_TEXLAY_MOD      "Texture Layers Modifier Group"
+    IDS_ATT_MAP_CHANNEL     "Explicit Mapping Channel"
+    IDS_TL_U_MOVE           "Move U"
+    IDS_TL_V_MOVE           "Move V"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TL_W_MOVE           "Move W"
+    IDS_TL_U_SCALE          "Scale U"
+    IDS_TL_V_SCALE          "Scale V"
+    IDS_TL_W_SCALE          "Scale W"
+    IDS_MAPTYPE_PELT        "Pelt"
+    IDS_DC_SELEDGES         "Select Edges"
+    IDS_DC_MOUSE_EDGES_SUBTRACT "Remove faces from selection"
+    IDS_DC_MOUSE_SELECTEDGE "Select Edges"
+    IDS_TL_PELT_K           "Pelt K"
+    IDS_TL_PELT_B           "Pelt B"
+    IDS_TL_PELT_FRAME       "Pelt Frame Size"
+    IDS_TL_PELT_ITER        "Pelt Iterations"
+    IDS_TLP_ADDPT           "Add Point"
+    IDS_TLP_DELPT           "Delete Point"
+    IDS_PELT_VIEW_CLASS     "UVPeltViewClass"
+    IDS_TLP_MOVE            "Move"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TLP_MOVE_X          "Move X"
+    IDS_TLP_MOVE_Y          "Move Y"
+    IDS_TLP_PAN             "Pan"
+    IDS_TLP_ZOOM            "Zoom"
+    IDS_TLP_ZOOMEXT         "Zoom Extents"
+    IDS_PELT_MOVEPOINTS     "Move Points"
+    IDS_PELT_FRAME          "Change Pelt Frame"
+    IDS_TLP_SAVE_FRAME      "Save Pelt Frame"
+    IDS_TLP_LOAD_FRAME      "Load Pelt Frame"
+    IDS_PELT_FRAME_FILE     "Pelt Frame files (*.upf)"
+    IDS_TLFR_PICKFRAME      "Pick UVW Frame"
+    IDS_TLFR_ILLEGAL_FRAME  "Illegal UVW Frame"
+    IDS_TLFR_FRAME          "UVW Frame Mapping"
+    IDS_MAPTYPE_FRAME       "Frame"
+    IDS_TL_U_ROTATE         "Rotate U"
+    IDS_TL_V_ROTATE         "Rotate V"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TL_W_ROTATE         "Rotate W"
+    IDS_PELT_SYMM           "Symmetry"
+    IDS_PELT_SYMM_X         "Symmetry X"
+    IDS_PELT_SYMM_Y         "Symmetry Y"
+    IDS_PELT_ROTP90         "90 CW"
+    IDS_PELT_ROTN90         "90 CCW"
+    IDS_PELT_ROT180         "180"
+    IDS_TLP_SYMMPAIR        "Create Symmetry Pair"
+    IDS_TL_SPL_NORMALS_START "Normals Start"
+    IDS_ADD_GROUP           "Add Group"
+    IDS_DEL_GROUP           "Delete Group"
+    IDS_TOOLS               "Tools & Options"
+    IDS_TL2_UVWFILES        "UVW Files (*.uvw)"
+    IDS_TL2_SAVEOBJECT      "Save UVW"
+    IDS_TL2_FILEEXISTS      "%s already exists.\nDo you want to replace it?"
+    IDS_TLP_SCALE           "Scale"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TLP_SCALE_X         "Scale X"
+    IDS_TLP_SCALE_Y         "Scale Y"
+    IDS_TLP_ROTATE          "Rotate"
+    IDS_PELT_ROTATEPOINTS   "Rotate Points"
+    IDS_PELT_SCALEPOINTS    "Scale Points"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
