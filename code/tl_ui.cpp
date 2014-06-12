@@ -1599,7 +1599,7 @@ void MultiMapMod::OpenCloseRollups() {
 #define UPDATE_LENGTH_SPIN													\
 	uvwProy[current_channel]->pblock->GetValue(uvw_length,t,f_val,iv);		\
 	length_spin->SetValue(f_val,FALSE);										\
-	length_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_length), t) );
+	length_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_length), t) );
 		
 #define UPDATE_WIDTH_SPIN													\
 	uvwProy[current_channel]->pblock->GetValue(uvw_width,t,f_val,iv);		\
@@ -1611,44 +1611,44 @@ void MultiMapMod::OpenCloseRollups() {
 		width_spin->Enable(TRUE);											\
 		}																	\
 	width_spin->SetValue(f_val,FALSE);										\
-	width_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_width), t) );
+	width_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_width), t) );
 
 #define UPDATE_HEIGHT_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_height,t,f_val,iv);		\
 	height_spin->SetValue(f_val,FALSE);								\
-	height_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_height), t) );
+	height_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_height), t) );
 
 
 // TILING AND ATTENUATION
 #define UPDATE_U_TILE_SPIN												\
 	uvwProy[current_channel]->pblock->GetValue(uvw_tile_u,t,f_val,iv);	\
 	u_start_spin->SetValue(f_val,FALSE);								\
-	u_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_tile_u), t) );
+	u_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_tile_u), t) );
 
 #define UPDATE_U_OFFSET_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_offset_u,t,f_val,iv);		\
 	u_offset_spin->SetValue(f_val,FALSE);								\
-	u_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_offset_u), t) );
+	u_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_offset_u), t) );
 
 #define UPDATE_V_TILE_SPIN												\
 	uvwProy[current_channel]->pblock->GetValue(uvw_tile_v,t,f_val,iv);	\
 	v_start_spin->SetValue(f_val,FALSE);								\
-	v_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_tile_v), t) );
+	v_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_tile_v), t) );
 
 #define UPDATE_V_OFFSET_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_offset_v,t,f_val,iv);		\
 	v_offset_spin->SetValue(f_val,FALSE);								\
-	v_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_offset_v), t) );
+	v_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_offset_v), t) );
 
 #define UPDATE_W_TILE_SPIN												\
 	uvwProy[current_channel]->pblock->GetValue(uvw_tile_w,t,f_val,iv);	\
 	w_start_spin->SetValue(f_val,FALSE);								\
-	w_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_tile_w), t) );
+	w_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_tile_w), t) );
 
 #define UPDATE_W_OFFSET_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_offset_w,t,f_val,iv);		\
 	w_offset_spin->SetValue(f_val,FALSE);								\
-	w_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_offset_w), t) );
+	w_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_offset_w), t) );
 
 #define UPDATE_ATT_ON_CHECK												\
 	uvwProy[current_channel]->pblock->GetValue(uvw_atton,t,b_val,iv);	\
@@ -1657,42 +1657,42 @@ void MultiMapMod::OpenCloseRollups() {
 #define UPDATE_ATT_ALL_SPIN												\
 	uvwProy[current_channel]->pblock->GetValue(uvw_att,t,f_val,iv);			\
 	att_all_spin->SetValue(f_val,FALSE);								\
-	att_all_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_att), t) );
+	att_all_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_att), t) );
 
 #define UPDATE_ATT_U_START_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_aus,t,f_val,iv);			\
 	att_u_start_spin->SetValue(f_val,FALSE);							\
-	att_u_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_aus), t) );
+	att_u_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_aus), t) );
 
 #define UPDATE_ATT_U_OFFSET_SPIN									\
 	uvwProy[current_channel]->pblock->GetValue(uvw_aue,t,f_val,iv);			\
 	att_u_offset_spin->SetValue(f_val,FALSE);						\
-	att_u_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_aue), t) );
+	att_u_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_aue), t) );
 
 #define UPDATE_ATT_V_START_SPIN										\
 	uvwProy[current_channel]->pblock->GetValue(uvw_avs,t,f_val,iv);			\
 	att_v_start_spin->SetValue(f_val,FALSE);						\
-	att_v_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_avs), t) );
+	att_v_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_avs), t) );
 
 #define UPDATE_ATT_V_OFFSET_SPIN									\
 	uvwProy[current_channel]->pblock->GetValue(uvw_ave,t,f_val,iv);			\
 	att_v_offset_spin->SetValue(f_val,FALSE);						\
-	att_v_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_ave), t) );
+	att_v_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_ave), t) );
 
 #define UPDATE_ATT_W_START_SPIN										\
 	uvwProy[current_channel]->pblock->GetValue(uvw_aws,t,f_val,iv);			\
 	att_w_start_spin->SetValue(f_val,FALSE);						\
-	att_w_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_aws), t) );
+	att_w_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_aws), t) );
 
 #define UPDATE_ATT_W_OFFSET_SPIN									\
 	uvwProy[current_channel]->pblock->GetValue(uvw_awe,t,f_val,iv);			\
 	att_w_offset_spin->SetValue(f_val,FALSE);						\
-	att_w_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_awe), t) );
+	att_w_offset_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_awe), t) );
 
 #define UPDATE_ATT_RUV_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_aruv,t,f_val,iv);			\
 	att_ruv_spin->SetValue(f_val,FALSE);							\
-	att_ruv_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_aruv), t) );
+	att_ruv_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_aruv), t) );
 
 #define UPDATE_AXIS_RADIO											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_axis,t,i_val,iv);			\
@@ -1701,47 +1701,47 @@ void MultiMapMod::OpenCloseRollups() {
 #define UPDATE_U_MOVE_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_move_u,t,f_val,iv);			\
 	u_move_spin->SetValue(f_val,FALSE);							\
-	u_move_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_move_u), t) );
+	u_move_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_move_u), t) );
 
 #define UPDATE_V_MOVE_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_move_v,t,f_val,iv);			\
 	v_move_spin->SetValue(f_val,FALSE);							\
-	v_move_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_move_v), t) );
+	v_move_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_move_v), t) );
 
 #define UPDATE_W_MOVE_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_move_w,t,f_val,iv);			\
 	w_move_spin->SetValue(f_val,FALSE);							\
-	w_move_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_move_w), t) );
+	w_move_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_move_w), t) );
 
 #define UPDATE_U_ROTATE_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_rotate_u,t,f_val,iv);			\
 	u_rotate_spin->SetValue(f_val,FALSE);							\
-	u_rotate_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_rotate_u), t) );
+	u_rotate_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_rotate_u), t) );
 
 #define UPDATE_V_ROTATE_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_rotate_v,t,f_val,iv);			\
 	v_rotate_spin->SetValue(f_val,FALSE);							\
-	v_rotate_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_rotate_v), t) );
+	v_rotate_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_rotate_v), t) );
 
 #define UPDATE_W_ROTATE_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_rotate_w,t,f_val,iv);			\
 	w_rotate_spin->SetValue(f_val,FALSE);							\
-	w_rotate_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_rotate_w), t) );
+	w_rotate_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_rotate_w), t) );
 
 #define UPDATE_U_SCALE_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_scale_u,t,f_val,iv);			\
 	u_scale_spin->SetValue(f_val,FALSE);							\
-	u_scale_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_scale_u), t) );
+	u_scale_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_scale_u), t) );
 
 #define UPDATE_V_SCALE_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_scale_v,t,f_val,iv);			\
 	v_scale_spin->SetValue(f_val,FALSE);							\
-	v_scale_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_scale_v), t) );
+	v_scale_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_scale_v), t) );
 
 #define UPDATE_W_SCALE_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_scale_w,t,f_val,iv);			\
 	w_scale_spin->SetValue(f_val,FALSE);							\
-	w_scale_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_scale_w), t) );
+	w_scale_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_scale_w), t) );
 
 #define UPDATE_XF_ATT_CHECK												\
 	uvwProy[current_channel]->pblock->GetValue(uvw_xform_att,t,b_val,iv);	\
@@ -1782,34 +1782,34 @@ void MultiMapMod::OpenCloseRollups() {
 #define UPDATE_NORMALS_START_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_normals_start,t,f_val,iv);			\
 	normals_start_spin->SetValue(f_val,FALSE);							\
-	normals_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_normals_start), t) );
+	normals_start_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_normals_start), t) );
 
 /*// FREE FORM MAPPING
 #define UPDATE_FREE_THRESH_SPIN										\
 	uvwProy[current_channel]->pblock->GetValue(uvw_ffm_thresh,t,f_val,iv);	\
 	free_threshold_spin->SetValue(f_val,FALSE);						\
-	free_threshold_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_ffm_thresh), t) );
+	free_threshold_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_ffm_thresh), t) );
 */
 // PELT MAPPING
 #define UPDATE_PELT_RIGIDITY_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_pelt_rigidity,t,f_val,iv);	\
 	pelt_rigidity_spin->SetValue(f_val,FALSE);						\
-	pelt_rigidity_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_pelt_rigidity), t) );
+	pelt_rigidity_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_pelt_rigidity), t) );
 
 #define UPDATE_PELT_STABILITY_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_pelt_stability,t,f_val,iv);	\
 	pelt_stability_spin->SetValue(f_val,FALSE);						\
-	pelt_stability_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_pelt_stability), t) );
+	pelt_stability_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_pelt_stability), t) );
 
 #define UPDATE_PELT_FRAME_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_pelt_frame,t,f_val,iv);	\
 	pelt_frame_spin->SetValue(f_val,FALSE);						\
-	pelt_frame_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_pelt_frame), t) );
+	pelt_frame_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_pelt_frame), t) );
 
 #define UPDATE_PELT_ITER_SPIN											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_pelt_iter,t,i_val,iv);	\
 	pelt_iter_spin->SetValue(i_val,FALSE);						\
-	pelt_iter_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTimeByIndex(uvwProy[current_channel]->pblock->IDtoIndex(uvw_pelt_iter), t) );
+	pelt_iter_spin->SetKeyBrackets( uvwProy[current_channel]->pblock->KeyFrameAtTime(uvwProy[current_channel]->pblock->IDtoIndex(uvw_pelt_iter), t) );
 
 #define UPDATE_PELT_BORDER_ON_CHECK											\
 	uvwProy[current_channel]->pblock->GetValue(uvw_pelt_border,t,b_val,iv);	\

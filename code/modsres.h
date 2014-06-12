@@ -56,7 +56,6 @@
 #define IDB_TEXLAY_ATT_MASK             224
 #define IDD_IO_DLG                      225
 #define IDB_TEXLAY2_ABOUT               233
-#define IDB_TEXLAY2_ABOUT_DEMO          235
 #define IDD_DIALOG1                     236
 #define IDC_PICK_MM_NODE                1000
 #define IDC_PICK_SURFACE                1001

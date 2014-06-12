@@ -774,7 +774,6 @@ IDB_TEXLAY_ATT          BITMAP                  "texlay_a.bmp"
 IDB_TEXLAY_ATT_MASK     BITMAP                  "bmp00006.bmp"
 IDB_DCP                 BITMAP                  "dcp.bmp"
 IDB_TEXLAY2_ABOUT       BITMAP                  "TexLay2About.bmp"
-IDB_TEXLAY2_ABOUT_DEMO  BITMAP                  "TexLay2AboutDemo.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
