@@ -5433,7 +5433,7 @@ void UVWProyector::InitControl( ModContext &mc,Object *obj,int type,TimeValue t 
 
 #if MAX_VERSION_MAJOR < 24
 			Matrix3(1),
-			Matrix3(1),
+			Matrix3(1)
 #else
 			Matrix3(),
 			Matrix3()
