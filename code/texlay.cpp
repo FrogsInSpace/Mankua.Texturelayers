@@ -214,9 +214,12 @@ class TextureLayers: public MultiTex
 		RefTargetHandle Clone(RemapDir& remap = DefaultRemapDir());
 #endif
 
-		RefResult NotifyRefChanged( Interval changeInt, RefTargetHandle hTarget, 
-		   PartID& partID, RefMessage message );
-
+// JW Code Change: NotifyRefChanged signature changed in 3ds Max 2015+
+#if MAX_VERSION_MAJOR < 17
+		RefResult NotifyRefChanged( Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message );
+#else
+		RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate );
+#endif
 		// IO
 		IOResult Save(ISave *isave);
 		IOResult Load(ILoad *iload);
@@ -443,8 +446,8 @@ BOOL TextureLayersDlg::PanelProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
 
 				iModAtt[i] = GetICustButton(GetDlgItem(hWnd,IDC_TL_MODAT1+i));
 				iModAtt[i]->SetType(CBT_CHECK);
-				iModAtt[i]->SetText("Mod");
-				iModAtt[i]->SetTooltip(TRUE, "Modifier Attenuation");
+				iModAtt[i]->SetText( _T("Mod") );
+				iModAtt[i]->SetTooltip(TRUE, _T("Modifier Attenuation"));
 
 				iSpin[i] = SetupIntSpinner(hWnd,IDC_SPIN_CH1+i,IDC_EDIT_CH1+i,1,1000,1);
 				}
@@ -1561,16 +1564,20 @@ void TextureLayers::SetSubTexmap(int i, Texmap *m) {
 
 TSTR TextureLayers::GetSubTexmapSlotName(int i) {
 	TSTR buf;
-	buf.printf("%s %d:",GetString(IDS_MM_LAYNUM),i+1);
+	buf.printf(_T("%s %d:"),GetString(IDS_MM_LAYNUM),i+1);
 	return buf;
 	}
 	 
 TSTR TextureLayers::SubAnimName(int i) {	
 	return GetSubTexmapTVName(i);
 	}
-
-RefResult TextureLayers::NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, 
-   PartID& partID, RefMessage message ) {
+// JW Code Change: NotifyRefChanged() Signature changed with Max2015+
+#if MAX_VERSION_MAJOR < 17
+RefResult TextureLayers::NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message ) 
+#else
+RefResult TextureLayers::NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate)
+#endif
+{
 	switch (message) {
 		case REFMSG_CHANGE:			
 			if (paramDlg) 

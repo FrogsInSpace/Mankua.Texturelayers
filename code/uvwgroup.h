@@ -67,7 +67,13 @@ class GridMesh : public ReferenceTarget {
 		int NumRefs() { return vtCtrl.Count();}
         RefTargetHandle GetReference(int i) { return vtCtrl[i];}
         void SetReference(int i, RefTargetHandle rtarg) {vtCtrl[i] = (Control*)rtarg;}
-        RefResult NotifyRefChanged(Interval, RefTargetHandle, PartID&, RefMessage) {return REF_SUCCEED;}
+
+// JW Code Change: NotifyRefChanged signature changed in 3ds Max 2015+
+#if MAX_VERSION_MAJOR < 17
+		RefResult NotifyRefChanged(Interval, RefTargetHandle, PartID&, RefMessage) { return REF_SUCCEED; }
+#else
+		RefResult NotifyRefChanged(const Interval&, RefTargetHandle, PartID&, RefMessage, BOOL) { return REF_SUCCEED; }
+#endif
 
 		Interval LocalValidity(TimeValue t);
         int NumSubs()  { return NumRefs();}
@@ -417,7 +423,14 @@ class UVWProyector : public ReferenceTarget {
 		int NumRefs() { return 4;}
         RefTargetHandle GetReference(int i);
         void SetReference(int i, RefTargetHandle rtarg);
-        RefResult NotifyRefChanged(Interval, RefTargetHandle, PartID&, RefMessage);
+
+// JW Code Change: NotifyRefChanged signature changed in 3ds Max 2015+
+#if MAX_VERSION_MAJOR < 17
+		RefResult NotifyRefChanged(Interval, RefTargetHandle, PartID&, RefMessage);
+#else
+		RefResult NotifyRefChanged( const Interval&, RefTargetHandle, PartID&, RefMessage, BOOL);
+#endif
+
 		Interval LocalValidity(TimeValue t);
 		
         int NumSubs();

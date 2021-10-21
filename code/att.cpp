@@ -258,6 +258,10 @@ void AttMapDlgProc::DrawCurve(HWND hWnd,HDC hdc) {
 		}
 	}
 
+#if MAX_VERSION_MAJOR < 15 // JW: end was renamed to p_end in Max2013+
+#define p_end end
+#endif
+
 static ParamBlockDesc2 attmap_param_blk ( attmap_params, _T("parameters"),  0, &attmapCD, P_AUTO_CONSTRUCT + P_AUTO_UI, 0, 
 	//rollout
 	IDD_ATT, IDS_DC_ATTPARAMS, 0, 0, NULL, 
@@ -266,66 +270,66 @@ static ParamBlockDesc2 attmap_param_blk ( attmap_params, _T("parameters"),  0, &
 		p_refno,		1,
 		p_subtexno,		0,		
 		p_ui,			TYPE_TEXMAPBUTTON, IDC_TINT_MAP,
-		end,
+		p_end,
 	attmap_map_on,	_T("map_on"), TYPE_BOOL,			0,				IDS_JW_MAP1ENABLE,
 		p_default,		TRUE,
 		p_ui,			TYPE_SINGLECHEKBOX, IDC_MAPON,
-		end,
-	pb_att_face,	_T("att_face"), TYPE_BOOL,		0,				_T("Use face selection"),
+		p_end,
+	pb_att_face,		_T("att_face"), TYPE_BOOL,		0,	IDS_ATT_MOD,
 		p_default,		TRUE,
 		p_ui,			TYPE_SINGLECHEKBOX, IDC_ATT_FACE,
-		end,
-	pb_att_mod,		_T("att_mod"), TYPE_BOOL,		0,			_T("Use modifier selection"),
+		p_end,
+	pb_att_mod,		_T("att_mod"), TYPE_BOOL,		0, IDS_ATT_MOD,
 		p_default,		TRUE,
 		p_ui,			TYPE_SINGLECHEKBOX, IDC_ATT_MOD,
-		end,
+		p_end,
 	pb_map_channel,	_T("map_channel"),   TYPE_INT,			P_ANIMATABLE,	IDS_DC_CANAL,
 		p_default,		1,
 		p_range,		0, 99,
-		end,
-	attuvwn_type,	_T("attn_type"),		TYPE_INT,			0,				_T("type"),
+		p_end,
+	attuvwn_type,	_T("attn_type"),		TYPE_INT,			0,				IDS_ATT_TYPE,
 		p_default,		0,
 		p_range,		0,	3,
 		p_ui,			TYPE_RADIO, 4, IDC_ATT_UVNOT, IDC_ATT_TOP, IDC_ATT_BOTT, IDC_ATT_CURVE,
-		end,
-	uvwn_center,	_T("attn_center"),   TYPE_FLOAT,			P_ANIMATABLE,	_T("Ceter"),
+		p_end, 
+	uvwn_center,	_T("attn_center"),   TYPE_FLOAT,			P_ANIMATABLE, IDS_ATT_TYPE,
 		p_default,		0.0,
 		p_range,		0.0, 180.0,
 		p_ui, 			TYPE_SPINNER, EDITTYPE_FLOAT,  IDC_ATTCEN_EDIT, IDC_ATTCEN_SPIN, 0.1f,
-		end,
-	uvwn_start,		_T("attn_start"),   TYPE_FLOAT,			P_ANIMATABLE,	_T("Start"),
+		p_end,
+	uvwn_start,		_T("attn_start"),   TYPE_FLOAT,			P_ANIMATABLE, IDS_ATT_START,
 		p_default,		0.0,
 		p_range,		0.0, 180.0,
 		p_ui, 			TYPE_SPINNER, EDITTYPE_FLOAT,  IDC_ATTSTR_EDIT, IDC_ATTSTR_SPIN, 0.1f,
-		end,
-	uvwn_offset,	_T("attn_offset"),   TYPE_FLOAT,			P_ANIMATABLE,	_T("Offset"),
+		p_end,
+	uvwn_offset,	_T("attn_offset"),   TYPE_FLOAT,			P_ANIMATABLE,	IDS_ATT_OFFSET,
 		p_default,		90.0,
 		p_range,		0.0, 180.0,
 		p_ui, 			TYPE_SPINNER, EDITTYPE_FLOAT,  IDC_ATTOFF_EDIT, IDC_ATTOFF_SPIN, 0.1f,
-		end,
-	uvwn_in,		_T("attn_inside"),   TYPE_FLOAT,			P_ANIMATABLE,	_T("Inside"),
+		p_end,
+	uvwn_in,		_T("attn_inside"),   TYPE_FLOAT,			P_ANIMATABLE,	IDS_ATT_INSIDE,
 		p_default,		1.0,
 		p_range,		0.0, 1.0,
 		p_ui, 			TYPE_SPINNER, EDITTYPE_FLOAT,  IDC_ATTIN_EDIT, IDC_ATTIN_SPIN, 0.005f,
-		end,
-	uvwn_out,		_T("attn_outside"),   TYPE_FLOAT,			P_ANIMATABLE,	_T("Outside"),
+		p_end,
+	uvwn_out,		_T("attn_outside"),   TYPE_FLOAT,	P_ANIMATABLE, IDS_ATT_OUTSIDE,
 		p_default,		0.0,
 		p_range,		0.0, 1.0,
 		p_ui, 			TYPE_SPINNER, EDITTYPE_FLOAT,  IDC_ATTOUT_EDIT, IDC_ATTOUT_SPIN, 0.005f,
-		end,
-	uvwn_uvwnormal,	_T("attn_axis"),		TYPE_INT,			0,				_T("Normal"),
+		p_end,
+	uvwn_uvwnormal,	_T("attn_axis"),		TYPE_INT,			0, IDS_ATT_NORMAL,
 		p_default,		0,
 		p_range,		0,	2,
 		p_ui,			TYPE_RADIO, 3, IDC_UV, IDC_VW, IDC_WU,
-		end,
+		p_end,
 	pb_use_mod,		_T("use_mod"), TYPE_BOOL,			0,				IDS_JW_MAP1ENABLE,
 		p_default,		TRUE,
-		end,
+		p_end,
 	pb_mod_group,	_T("mod_group"),   TYPE_INT,			0,	IDS_DC_CANAL,
 		p_default,		1,
 		p_range,		0, 1000,
-		end,
-	end
+		p_end,
+	p_end
 );
 
 
@@ -759,9 +763,13 @@ TSTR AttMap::SubAnimName(int i) {
 		default: return GetSubTexmapTVName(i-1);
 		}
 	}
-
-RefResult AttMap::NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, 
-   PartID& partID, RefMessage message ) {
+// JW Code Change: NotifyRefChanged() Signature changed with Max2015+
+#if MAX_VERSION_MAJOR < 17
+RefResult AttMap::NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget,  PartID& partID, RefMessage message ) 
+#else
+RefResult AttMap::NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message , BOOL propagate )
+#endif
+{
 	switch (message) {
 		case REFMSG_CHANGE:
 			ivalid.SetEmpty();
@@ -779,7 +787,7 @@ RefResult AttMap::NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget,
 			break;
 		}
 	return(REF_SUCCEED);
-	}
+}
 
 
 #define MTL_HDR_CHUNK		0x4000

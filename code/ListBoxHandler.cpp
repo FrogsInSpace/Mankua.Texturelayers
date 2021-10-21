@@ -43,7 +43,7 @@ BOOL CListBoxHandler::SetTarget(HINSTANCE hInstance, HWND hwndListbox)
 	//m_pfOriginalProc = (WNDPROC)SetWindowLong(m_hwndListBox, GWLP_WNDPROC, (LONG)WindowProc);
 	m_pfOriginalProc = (WNDPROC)SetWindowLongPtr( m_hwndListBox, GWLP_WNDPROC, (LONG_PTR)WindowProc );
 	
-	SetProp(m_hwndListBox, "PROP_THIS", this);
+	SetProp(m_hwndListBox, _T("PROP_THIS"), this);
 
 	return TRUE;
 	}
@@ -61,7 +61,7 @@ HCURSOR CListBoxHandler::GetDragCursor()
 //Win32 : LRESULT CALLBACK CListBoxHandler::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 LONG_PTR CALLBACK CListBoxHandler::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	CListBoxHandler* pThis = (CListBoxHandler*)GetProp(hwnd, "PROP_THIS");
+	CListBoxHandler* pThis = (CListBoxHandler*)GetProp(hwnd, _T("PROP_THIS"));
 
 	LRESULT result;
 	int cur_sel = LB_ERR;

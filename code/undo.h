@@ -253,7 +253,7 @@ class PeltPointsPosRestore : public RestoreObj {
 		void Redo();
 
 		void EndHold() {uvp->ClearAFlag(A_HELD);}
-		TSTR Description() {return TSTR(_T(GetString(IDS_PELT_MOVEPOINTS)));}
+		TSTR Description() {   return TSTR( GetString(IDS_PELT_MOVEPOINTS) );  }
 	};
 
 class PeltFrameRestore : public RestoreObj {
@@ -269,7 +269,7 @@ class PeltFrameRestore : public RestoreObj {
 		void Redo();
 
 		void EndHold() {uvp->ClearAFlag(A_HELD);}
-		TSTR Description() {return TSTR(_T(GetString(IDS_PELT_FRAME)));}
+		TSTR Description() {return TSTR( GetString(IDS_PELT_FRAME) );}
 	};
 
 class MRSRestore : public RestoreObj {
@@ -283,7 +283,7 @@ class MRSRestore : public RestoreObj {
 		void Redo();
 
 		void EndHold() {mod->ClearAFlag(A_HELD);}
-		TSTR Description() {return TSTR(_T(GetString(IDS_PELT_FRAME)));}
+		TSTR Description() {return TSTR( GetString(IDS_PELT_FRAME) );}
 	};
 
 #endif

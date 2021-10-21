@@ -31,7 +31,8 @@ enum
 { 
 	attmap_map,
 	attmap_map_on, // main grad params 
-	pb_att_face,	pb_att_mod,
+	pb_att_face,
+	pb_att_mod,
 	pb_map_channel,
 	attuvwn_type,
 	uvwn_center,uvwn_start,uvwn_offset,uvwn_in,uvwn_out,
@@ -160,8 +161,12 @@ class AttMap: public MultiTex {
 		RefTargetHandle Clone(RemapDir& remap = DefaultRemapDir());
 #endif
 
-		RefResult NotifyRefChanged( Interval changeInt, RefTargetHandle hTarget, 
-		   PartID& partID, RefMessage message );
+// JW Code Change: NotifyRefChanged signature changed in 3ds Max 2015+
+#if MAX_VERSION_MAJOR < 17
+		RefResult NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message);
+#else
+		RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
+#endif
 
 		// IO
 		IOResult Save(ISave *isave);

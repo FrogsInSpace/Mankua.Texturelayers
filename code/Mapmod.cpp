@@ -40,6 +40,7 @@ static GenSubObjType SOT_Faces(14);
 static GenSubObjType SOT_Edges(14);
 #endif
 
+
 static inline Point3 pabs(Point3 p) { return Point3(fabs(p.x),fabs(p.y),fabs(p.z)); }
 
 //--- ClassDescriptor and class vars ---------------------------------
@@ -183,7 +184,12 @@ void MultiMapMod::ViewportAlign() {
 	theHold.Begin();
 	theHold.Put(new GroupsTableRestore(this,INVALID_GROUP));
 
+//JW Code Change: GetActiveViewport is deprecated in 3ds Max 2013+
+#if MAX_VERSION_MAJOR < 15
 	ViewExp *vpt = ip->GetActiveViewport();
+#else
+	ViewExp *vpt = &ip->GetActiveViewExp();
+#endif
 	if (!vpt) return;
 
 	// Get mod contexts and nodes for this modifier
@@ -242,7 +248,12 @@ void MultiMapMod::ViewportAlign() {
 	uvwProy[current_channel]->tmControl->SetValue(0, &pckt);
 
 	nodeList.DisposeTemporary();
+
+// JW Code Change: only necessary with legacy GetActiveViewport()
+#if MAX_VERSION_MAJOR < 15
 	ip->ReleaseViewport(vpt);
+#endif	
+	
 	ip->RedrawViews(ip->GetTime());
 
 	theHold.Put(new GroupsTableRestore(this,INVALID_GROUP));
@@ -266,8 +277,14 @@ static void MatrixFromNormal(Point3& normal, Matrix3& mat)
 	mat.NoScale();
 	}
 
-void FaceAlignMouseProc::FaceAlignMap(HWND hWnd,IPoint2 m) {
+void FaceAlignMouseProc::FaceAlignMap(HWND hWnd,IPoint2 m) 
+{
+//JW Code Change: GetActiveViewport is deprecated in 3ds Max 2013+
+#if MAX_VERSION_MAJOR < 15
 	ViewExp *vpt = ip->GetViewport(hWnd);
+#else
+	ViewExp *vpt = &ip->GetViewExp( hWnd );
+#endif
 	if (!vpt) return;
 
 	Ray ray, wray;
@@ -349,8 +366,12 @@ void FaceAlignMouseProc::FaceAlignMap(HWND hWnd,IPoint2 m) {
 		}
 
 	nodeList.DisposeTemporary();
+
+//JW Code Change:not necessary in 3ds Max 2013+
+#if MAX_VERSION_MAJOR < 15
 	ip->ReleaseViewport(vpt);
-	}
+#endif
+}
 
 int FaceAlignMouseProc::proc(
 		HWND hWnd, int msg, int point, int flags, IPoint2 m)
@@ -397,8 +418,13 @@ void FaceAlignMode::ExitMode()
 
 
 void RegionFitMouseProc::RegionFitMap(HWND hWnd,IPoint2 m)
-	{
+{
+	//JW Code Change: GetActiveViewport is deprecated in 3ds Max 2013+
+#if MAX_VERSION_MAJOR < 15
 	ViewExp *vpt = ip->GetViewport(hWnd);
+#else
+	ViewExp *vpt = &ip->GetViewExp(hWnd);
+#endif
 	if (!vpt) return;
 
 	// Get mod contexts and nodes for this modifier
@@ -442,7 +468,8 @@ void RegionFitMouseProc::RegionFitMap(HWND hWnd,IPoint2 m)
 	omray.p   = iwtm * omray.p;
 	omray.dir = VectorTransform(iwtm, omray.dir);
 
-	float dir, pnt, odir, opnt;
+	// JW Code change: fix unitialized locals warning
+	float dir=0.0, pnt = 0.0, odir = 0.0, opnt = 0.0;
 	switch (mod->uvwProy[mod->current_channel]->GetAxis()) {
 		case 0:
 			dir = mray.dir.x; odir = omray.dir.x;
@@ -471,8 +498,9 @@ void RegionFitMouseProc::RegionFitMap(HWND hWnd,IPoint2 m)
 		ctm.PreTranslate((p1+p2)/2.0f);
 
 		// Compute scale factors and scale
-		float sx;
-		float sy;
+
+		// JW Code Change : fix uninitialized locals warning
+		float sx=0.0 ,sy = 0.0;
 		switch (mod->uvwProy[mod->current_channel]->GetAxis()) {
 			case 0:
 				sx = (float)fabs(p1.z-p2.z);
@@ -504,9 +532,14 @@ void RegionFitMouseProc::RegionFitMap(HWND hWnd,IPoint2 m)
 		}
 
 	nodeList.DisposeTemporary();
+
+//JW Code Change: not necessary in Max 2013+
+#if MAX_VERSION_MAJOR < 15
 	ip->ReleaseViewport(vpt);
+#endif
+
 	ip->RedrawViews(ip->GetTime());
-	}
+}
 
 int RegionFitMouseProc::proc(
 		HWND hWnd, int msg, int point, int flags, IPoint2 m)
@@ -632,14 +665,16 @@ static BOOL GetAcquireType(HWND hWnd,int &type, int *acq)
 MultiMapMod *PickAcquire::FindFirstMap(ReferenceTarget *ref)
 	{
 	MultiMapMod *mod;
-	if (mod = GetTexLayInterface(ref)) {
+	// JW Code change, explicit != NULL check, prevent C4706
+	if ( (mod = GetTexLayInterface(ref)) != NULL ) {
 		if (!mod->TestAFlag(A_MOD_DISABLED)) return mod;
 		}
 	
 	for (int i=ref->NumRefs()-1; i>=0; i--) {
 		ReferenceTarget *cref = ref->GetReference(i);
 		if (cref) {
-			if (mod = FindFirstMap(cref)) return mod;			
+			// JW Code change, explicit != NULL check, prevent C4706
+			if ((mod = FindFirstMap(cref)) != NULL)  return mod;			
 			}
 		}
 	return NULL;
@@ -894,7 +929,7 @@ static INT_PTR CALLBACK SaveTLDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM
 			SendDlgItemMessage(hWnd,IDC_GROUPS,LB_RESETCONTENT,0,0);
 			for ( int i=0; i<io_info->mod->uvwProy.Count(); i++ ) {
 				TSTR name(io_info->mod->uvwProy[i]->descCanal);
-				SendDlgItemMessage(	hWnd,IDC_GROUPS,LB_ADDSTRING,0,(LPARAM)(TCHAR*)name);
+				SendDlgItemMessage(	hWnd,IDC_GROUPS,LB_ADDSTRING,0,(LPARAM)(const TCHAR*)name  );
 				}
 			}
 			break;
@@ -1569,7 +1604,9 @@ IOResult MultiMapMod::LoadLocalData(ILoad *iload, LocalModData **pld) {
 	int num_edges = 0;
 	BitArray set;
 	updateCache = TRUE;
-	int num_groups;
+	
+	// JW Code Change : fix uninitialized locals warning
+	int num_groups=0;
 	int i_g, i_f;
 
 	while (IO_OK==(res=iload->OpenChunk())) {
@@ -1786,7 +1823,10 @@ void MultiMapMod::BeginEditParams(IObjParam *ip, ULONG flags,Animatable *prev)
 	cut = 0;
 	paste = 0;
 
+#if MAX_VERSION_MAJOR < 17
+	// JW: has been deprecated in 3ds Max 2015 and up - SubObjectSelection always is enabled and can't be turned off
 	ip->EnableSubObjectSelection(TRUE);
+#endif
 
 	if (isNurbs) {
 		hIsNurbs = ip->AddRollupPage( hInstance, MAKEINTRESOURCE(IDD_NURBS), TexMagicNurbsProc, _T("NURBS"), (LPARAM)this);
@@ -1984,7 +2024,13 @@ void MultiMapMod::SetReference(int i, RefTargetHandle rtarg) {
 	uvwProy[i] = (UVWProyector*)rtarg;
 	}
 
-RefResult MultiMapMod::NotifyRefChanged( Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message) {
+// JW Code Change: NotifyRefChanged signature changed in 3ds Max 2015+
+#if MAX_VERSION_MAJOR < 17
+RefResult MultiMapMod::NotifyRefChanged( Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message) 
+#else
+RefResult MultiMapMod::NotifyRefChanged( const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate )
+#endif
+{
 	TimeValue t = GetCOREInterface()->GetTime();
 	if ( in_modify_object ) 
 		return REF_STOP;
@@ -2012,7 +2058,7 @@ TSTR MultiMapMod::SubAnimName(int i)
 	if (i >= uvwProy.Count()) return _T("");
 
 	TCHAR buf[256];
-	_stprintf(buf, _T("%s"),uvwProy[i]->descCanal);
+	_stprintf(buf, _T("%s"), uvwProy[i]->descCanal );
 	return TSTR(buf);
 	}
 
@@ -2185,11 +2231,11 @@ void MultiMapMod::AddNewGroup() {
 	current_channel = num_group;
 	top_group = num_group;
 
-	SendDlgItemMessage( hwnd_main,IDC_TL_GROUPS_MENU,LB_ADDSTRING, 0, (LPARAM)(TCHAR*)uvw_group->descCanal);
+	SendDlgItemMessage( hwnd_main,IDC_TL_GROUPS_MENU,LB_ADDSTRING, 0, (LPARAM)(const TCHAR*) uvw_group->descCanal );
 	SendDlgItemMessage( hwnd_main,IDC_TL_GROUPS_MENU,LB_SETTOPINDEX,top_group,0);
 
 	theHold.Put( new GroupsTableRestore(this,END_EDIT) );
-	theHold.Accept("Add Group");
+	theHold.Accept(_T("Add Group"));
 
 	LocalDataChanged();
 	UpdateUIAll();
@@ -2248,7 +2294,7 @@ void MultiMapMod::RepositionGroup(int from, int to) {
 		}
 
 	theHold.Put( new GroupsTableRestore(this,END_EDIT) );
-	theHold.Accept("Move Group");
+	theHold.Accept(_T("Move Group"));
 
 	LocalDataChanged();
 	SendDlgItemMessage(	hwnd_main,IDC_TL_GROUPS_MENU,LB_SETITEMDATA,0,0);
@@ -2295,7 +2341,7 @@ void MultiMapMod::DeleteCurrentGroup() {
 	SendDlgItemMessage(hwnd_main,IDC_TL_GROUPS_MENU, LB_DELETESTRING, del_group, 0);
 
 	theHold.Put( new GroupsTableRestore(this,END_EDIT) );
-	theHold.Accept("Delete Group");
+	theHold.Accept(_T("Delete Group"));
 
 	LocalDataChanged();
 	UpdateUIAll();
@@ -4018,8 +4064,10 @@ int MultiMapMod::DoFFMIcon(int channel, TimeValue t, BOOL sel, PolyLineProc &lp,
 		lp.proc(aept,2);
 		}
 
-	float u;
+	float u = 0;
 	float tileUs,tileUe,tileVs,tileVe,attUs,attUe,attVs,attVe,aeUs,aeUe,aeVs,aeVe;
+
+	tileUs = tileUe = tileVs = tileVe = attUs = attUe = attVs = attVe = aeUs = aeUe = aeVs = aeVe = 0;
 
 	BOOL tileDisplay  = (uvwProy[channel]->tile_u != 1.0f || uvwProy[channel]->offset_u != 0.0f ||
 						 uvwProy[channel]->tile_v != 1.0f || uvwProy[channel]->offset_v != 0.0f);
@@ -4236,12 +4284,23 @@ int MultiMapMod::HitTest( TimeValue t, INode* inode, int type, int crossing, int
 		if (tipo == IS_MESH) {
 			if (!md->GetMesh()) return 0;
 			SubObjHitList hitList;
-			MeshSubHitRec *rec;	
 		
 			Mesh &mesh = *((TexLayMCData*)mc->localData)->GetMesh();
 			mesh.faceSel = ((TexLayMCData*)mc->localData)->face_sel[current_channel];
 
 			res = mesh.SubObjectHitTest(gw, gw->getMaterial(), &hr, flags|SUBHIT_FACES|SUBHIT_SELSOLID, hitList);
+
+
+// JW: with 3ds Max 2017+,  SubObjHitList use iterators ...
+#if MAX_VERSION_MAJOR > 18
+			MeshSubHitRec::Iterator it = hitList.begin();
+			if (it != hitList.end() )
+				selecting_faces = TRUE;
+
+			for( ; it != hitList.end() ; it++ )
+				vpt->LogHit(inode, mc, it->dist, it->index, NULL);
+#else
+			MeshSubHitRec *rec;
 
 			rec = hitList.First();
 			while (rec) {
@@ -4249,13 +4308,13 @@ int MultiMapMod::HitTest( TimeValue t, INode* inode, int type, int crossing, int
 				rec = rec->Next();
 				selecting_faces = TRUE;
 				}
+#endif
 			return res;
 			}
 
 		else if (tipo == IS_POLY) {
 			if (!md->GetMNMesh()) return 0;
 			SubObjHitList hitList;
-			MeshSubHitRec *rec;	
 		
 			MNMesh &mnmesh = *((TexLayMCData*)mc->localData)->GetMNMesh();
 			BitArray faceSel = ((TexLayMCData*)mc->localData)->face_sel[current_channel];
@@ -4263,12 +4322,25 @@ int MultiMapMod::HitTest( TimeValue t, INode* inode, int type, int crossing, int
 			mnmesh.FaceSelect(faceSel); 
 			res = mnmesh.SubObjectHitTest(gw, gw->getMaterial(), &hr, flags|SUBHIT_FACES|SUBHIT_SELSOLID, hitList);
 
+
+			// JW: with 3ds Max 2017+,  SubObjHitList use iterators ...
+#if MAX_VERSION_MAJOR > 18
+			MeshSubHitRec::Iterator it = hitList.begin();
+			if (it != hitList.end())
+				selecting_faces = TRUE;
+
+			for (; it != hitList.end(); it++)
+				vpt->LogHit(inode, mc, it->dist, it->index, NULL);
+#else
+			MeshSubHitRec *rec;
+
 			rec = hitList.First();
 			while (rec) {
 				vpt->LogHit(inode,mc,rec->dist,rec->index,NULL);
 				rec = rec->Next();
 				selecting_faces = TRUE;
 				}
+#endif
 			return res;
 			}
 
@@ -4319,7 +4391,6 @@ int MultiMapMod::HitTest( TimeValue t, INode* inode, int type, int crossing, int
 		if (tipo == IS_POLY) {
 			if (!md->GetMNMesh()) return 0;
 			SubObjHitList hitList;
-			MeshSubHitRec *rec;	
 		
 			MNMesh &mnmesh = *((TexLayMCData*)mc->localData)->GetMNMesh();
 			BitArray edgeSel = ((TexLayMCData*)mc->localData)->edge_sel[current_channel];
@@ -4328,12 +4399,24 @@ int MultiMapMod::HitTest( TimeValue t, INode* inode, int type, int crossing, int
 
 			res = mnmesh.SubObjectHitTest(gw, gw->getMaterial(), &hr, flags|SUBHIT_MNEDGES, hitList);
 	
+			// JW: with 3ds Max 2017+,  SubObjHitList use iterators ...
+#if MAX_VERSION_MAJOR > 18
+			MeshSubHitRec::Iterator it = hitList.begin();
+			if (it != hitList.end())
+				selecting_faces = TRUE;
+
+			for (; it != hitList.end(); it++)
+				vpt->LogHit(inode, mc, it->dist, it->index, NULL);
+#else
+			MeshSubHitRec *rec;
+
 			rec = hitList.First();
 			while (rec) {
 				vpt->LogHit(inode,mc,rec->dist,rec->index,NULL);
 				rec = rec->Next();
 				selecting_faces = TRUE;
 				}
+#endif
 			return res;
 			}
 		} // SEL_EDGES
@@ -5231,7 +5314,7 @@ void MultiMapMod::SaveTL( BitArray &sel_groups ) {
 	int numcans = sel_groups.NumberSet();
 	int can = 0;
 
-	FILE *tf = fopen(fname, "wb");
+	FILE *tf = _tfopen(fname, _T("wb"));
 	fwrite(&version, sizeof(int), 1, tf);
 	fwrite(&numcans, sizeof(int), 1, tf);
 	fwrite(&can,	 sizeof(int), 1, tf);
@@ -5415,7 +5498,13 @@ void MultiMapMod::SaveTL( BitArray &sel_groups ) {
 
 			int isSpline;
 			if (uvwProy[i]->spline_node) {
-				CStr nameNode(uvwProy[i]->spline_node->GetName());
+
+
+#if MAX_VERSION_MAJOR < 15
+				CStr nameNode( uvwProy[i]->spline_node->GetName() );
+#else
+				CStr nameNode( (const char * )uvwProy[i]->spline_node->GetName()  );
+#endif
 				isSpline = 1;
 				fwrite(&isSpline,sizeof(int),1,tf);
 				fwrite(nameNode.data(),1,nameNode.Length()+1,tf);
@@ -5439,8 +5528,11 @@ void MultiMapMod::SaveTL( BitArray &sel_groups ) {
 					}
 				}
 			// NEW IN TEXLAY 2.0
-
-			CStr nameChn(uvwProy[i]->descCanal);
+#if MAX_VERSION_MAJOR < 15
+			CStr nameChn(   uvwProy[i]->descCanal  );
+#else
+			CStr nameChn( CStr::FromMSTR(  uvwProy[i]->descCanal  ));
+#endif
 			fwrite(nameChn.data(),1,nameChn.Length()+1,tf);
 			}
 		}
@@ -5468,7 +5560,7 @@ void MultiMapMod::LoadTL(int fo) {
 		ip->GetModContexts(mcList,nodes);
 		TexLayMCData *md = (TexLayMCData*)mcList[0]->localData;
 
-		FILE *tf = fopen(fname, "rb");
+		FILE *tf = _tfopen(fname, _T("rb"));
 		int version;
 		int numcans;
 		int can;
@@ -5487,7 +5579,7 @@ void MultiMapMod::LoadTL(int fo) {
 				ReplaceReference( i, uvwProy[i] ); // 1+i tl_pblock
 
 				theHold.Put( new GroupsTableRestore(this,END_EDIT) );
-				theHold.Accept("Add Group");
+				theHold.Accept(_T("Add Group"));
 
 				uvwProy[i]->flags = 0;
 
@@ -5750,7 +5842,13 @@ void MultiMapMod::LoadTL(int fo) {
 
 				char chname[256];
 				read_string(chname,tf,256);
+
+#if MAX_VERSION_MAJOR < 15 
 				uvwProy[i]->descCanal = (TSTR)chname;
+#else
+			
+				uvwProy[i]->descCanal =  TSTR::FromCStr( chname ); //JW: is this static conversoin costly ?
+#endif
 				}
 			}
 		
@@ -5967,14 +6065,16 @@ void MultiMapMod::NewSetFromCurSel(TSTR &setName) {
 		
 		if ( level == SEL_FACES ) {
 			BitArray *set = NULL;
-			if (index>=0 && (set = meshData->face_sel_sets.GetSet(id)))
+			// JW Code change, explicit != NULL check, prevent C4706
+			if (index>=0 && ( (set = meshData->face_sel_sets.GetSet(id)) != NULL ))
 				*set = meshData->face_sel[current_channel];
 			else 
 				meshData->face_sel_sets.AppendSet(meshData->face_sel[current_channel],id);
 			}
 		else if ( level == SEL_EDGES ) {
 			BitArray *set = NULL;
-			if (index>=0 && (set = meshData->edge_sel_sets.GetSet(id)))
+			// JW Code change, explicit != NULL check, prevent C4706
+			if (index>=0 && ( (set = meshData->edge_sel_sets.GetSet(id))) != NULL)
 				*set = meshData->edge_sel[current_channel];
 			else 
 				meshData->edge_sel_sets.AppendSet(meshData->edge_sel[current_channel],id);
@@ -6095,7 +6195,8 @@ void MultiMapMod::NewSetByOperator(TSTR &newName, Tab <int> &sets, int op) {
 		if (!meshData) continue;
 	
 		BitArray bits;
-		GenericNamedSelSetList *setList;
+		// JW Code Change : fix uninitialized locals warning
+		GenericNamedSelSetList *setList=NULL;
 
 		if ( level == SEL_FACES )
 			setList = &meshData->face_sel_sets; 	
@@ -6368,7 +6469,7 @@ void MultiMapMod::PeltSaveLayout() {
 	ip->GetModContexts(mcList,nodes);
 
 	if ( nodes.Count() != 1 ) {
-		MessageBox(hwnd_pelt,"Please select only one object","Texture Layers",MB_OK);
+		MessageBox(hwnd_pelt, _T("Please select only one object"), _T("Texture Layers"),MB_OK);
 		return;
 		}
 
@@ -6385,7 +6486,7 @@ void MultiMapMod::PeltLoadLayout() {
 	ip->GetModContexts(mcList,nodes);
 
 	if ( nodes.Count() != 1 ) {
-		MessageBox(hwnd_pelt,"Please select only one object","Texture Layers",MB_OK);
+		MessageBox(hwnd_pelt,_T("Please select only one object"), _T("Texture Layers"),MB_OK);
 		return;
 		}
 
@@ -6395,7 +6496,7 @@ void MultiMapMod::PeltLoadLayout() {
 
 	theHold.Begin();
 	theHold.Put( new PeltFrameRestore(uvwProy[current_channel],this) );
-	theHold.Accept(_T(GetString(IDS_TLP_LOAD_FRAME)));
+	theHold.Accept (GetString(IDS_TLP_LOAD_FRAME) );
 
 	TSTR fname;
 	BOOL cancel = FALSE;
@@ -6407,7 +6508,7 @@ void MultiMapMod::PeltLoadLayout() {
 
 	int load_version;
 
-	FILE *tf = fopen(fname, "rb");
+	FILE *tf = _tfopen(fname, _T("rb"));
 	fread(&load_version, sizeof(load_version),1,tf);
 
 	if ( load_version>=1010 ) {
@@ -6419,7 +6520,7 @@ void MultiMapMod::PeltLoadLayout() {
 
 		if ( num_load_faces!=num_faces ) {
 			fclose(tf);
-			MessageBox(hwnd_pelt,"Pelt Info in file doesn't match this object","Texture Layers",MB_OK);
+			MessageBox(hwnd_pelt,_T("Pelt Info in file doesn't match this object"),_T("Texture Layers"),MB_OK);
 			return;
 			}
 
@@ -6434,7 +6535,7 @@ void MultiMapMod::PeltLoadLayout() {
 
 		if ( num_load_edges!=num_edges ) {
 			fclose(tf);
-			MessageBox(hwnd_pelt,"Pelt Info in file doesn't match this object","Texture Layers",MB_OK);
+			MessageBox(hwnd_pelt,_T("Pelt Info in file doesn't match this object"),_T("Texture Layers"),MB_OK);
 			return;
 			}
 
@@ -6770,7 +6871,7 @@ void MultiMapMod::LoadUVW() {
 
 	if(!GetOpenFileName(&ofn)) return;
 
-	FILE *file = fopen(fname,_T("rb"));
+	FILE *file = _tfopen(fname,_T("rb"));
 
 	int ver;
 	int vct;
@@ -6873,7 +6974,7 @@ void MultiMapMod::SaveUVW() {
 
 	if ( save_uvw_fname[0]!=0 ) {
 
-		FILE *file = fopen(save_uvw_fname,_T("wb"));
+		FILE *file = _tfopen(save_uvw_fname,_T("wb"));
 
 		int ver = -1;
 		fwrite(&ver, sizeof(ver), 1,file);
@@ -6961,7 +7062,7 @@ void MultiMapMod::LoadGroupUVW( int group ) {
 	TexLayMCData *d = (TexLayMCData*)list[0]->localData;
 
 	if ( nodes.Count() > 1 ) {
-		MessageBox(hwnd_main,"Please select just one object to load the UVW file","Texture Layers",MB_OK);
+		MessageBox(hwnd_main,_T("Please select just one object to load the UVW file"),_T("Texture Layers"),MB_OK);
 		}
 
 	PolyUVWData * group_uvw_data = d->group_uvw_data[group];
@@ -6969,7 +7070,8 @@ void MultiMapMod::LoadGroupUVW( int group ) {
 	LoadUVW();
 
 	int tipo = d->tipo;
-	int num_faces;
+	// JW Code Change : fix uninitialized locals warning
+	int num_faces=0;
 	if ( tipo == IS_MESH ) 
 		num_faces = d->mesh->numFaces;
 	if ( tipo == IS_POLY ) 
@@ -7027,7 +7129,7 @@ void MultiMapMod::LoadGroupUVW( int group ) {
 		d->face_sel[group] = temp_face_sel;
 		}
 	else 
-		MessageBox(hwnd_main,"Invalid data in file","Texture Layers",MB_OK);
+		MessageBox(hwnd_main,_T("Invalid data in file"),_T("Texture Layers"),MB_OK);
 
 	CleanTempUVWData();
 	LocalDataChanged();

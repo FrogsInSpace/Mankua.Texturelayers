@@ -22,10 +22,13 @@
 #include "load_cb.h"
 #include <vector>
 
+
 #define SYMMETRY_X		0
 #define SYMMETRY_Y		1
 #define SYMMETRY_KEEP	2
 #define SYMMETRY_BEST	3
+
+
 
 //***********************************************************************//
 //							GRID MESH METHODS							 //
@@ -258,7 +261,13 @@ IOResult GridMesh::Load(ILoad *iload) {
 				int fc;
 				iload->Read(&fc, sizeof(fc), &nb);
 				SetNumFaces(fc);
+
+//JW: ioapi changed considerably with 3ds Max 2013+ ( V15+ ) 
+#if MAX_VERSION_MAJOR < 15
 				if (fc) iload->Read(faces.Addr(0), sizeof(IPoint3)*faces.Count(), &nb);
+#else
+				if (fc) iload->ReadVoid(faces.Addr(0), sizeof(IPoint3)*faces.Count(), &nb);
+#endif
 				break;
 			case UVW_CHUNKID:
 				int uc;
@@ -295,7 +304,14 @@ IOResult GridMesh::Save(ISave *isave) {
 	isave->BeginChunk(FACES_CHUNKID);
 	int fc = faces.Count();
 	isave->Write(&fc,sizeof(fc),&nb);
-	if (fc) isave->Write(faces.Addr(0),sizeof(IPoint3)*faces.Count(), &nb);
+
+	//JW: ioapi changed considerably with 3ds Max 2013+ ( V15+ ) 
+#if MAX_VERSION_MAJOR < 15
+	if (fc) isave->Write(faces.Addr(0), sizeof(IPoint3)*faces.Count(), &nb);
+#else
+	if (fc) isave->WriteVoid(faces.Addr(0), sizeof(IPoint3)*faces.Count(), &nb);
+#endif
+
 	isave->EndChunk();
 
 	isave->BeginChunk(UVW_CHUNKID);
@@ -426,6 +442,10 @@ class UVWProyClassDesc:public ClassDesc2 {
 static UVWProyClassDesc uvwProyClassDesc;
 extern ClassDesc2* GetUVWProyClassDesc() {return &uvwProyClassDesc;}
 
+#if MAX_VERSION_MAJOR < 15 // JW: end was renamed to p_end in Max2013+
+#define p_end end
+#endif
+
 static ParamBlockDesc2 uvw_proy_param_blk ( uvw_proy_params, _T("UVWProyector"),  0, &uvwProyClassDesc, P_AUTO_CONSTRUCT + P_AUTO_UI, 0, //P_AUTO_CONSTRUCT + P_AUTO_UI
 	//rollout
 	0, IDS_PARAMETERS, 0, 0, NULL, 
@@ -434,215 +454,214 @@ static ParamBlockDesc2 uvw_proy_param_blk ( uvw_proy_params, _T("UVWProyector"),
 	uvw_length,			_T("Length"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_LENGTH,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_width,			_T("Width"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_WIDTH,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_height,			_T("Height"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_HEIGHT,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_tile_u,			_T("utile"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_TILE_U,
 		p_default,		1.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_offset_u,		_T("UOffset"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_OFFSET_U,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_tile_v,			_T("vtile"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_TILE_V,
 		p_default,		1.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_offset_v,		_T("VOffset"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_OFFSET_V,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_tile_w,			_T("wtile"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_TILE_W,
 		p_default,		1.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_offset_w,		_T("WOffset"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_OFFSET_W,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_atton,			_T("Att"),			TYPE_BOOL, 	0,	IDS_SIMPLE,
 		p_default, 		FALSE, 
-		end, 
+		p_end, 
 
 	uvw_att,			_T("GlobalAtt"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_ATT_ON,
 		p_default,		0.0f,
 		p_range, 		0.0f, 100.0f, 
-		end,
+		p_end,
 	
  	uvw_aus,			_T("AttUStart"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_ATT_U_S,
 		p_default,		1.0f,
 		p_range, 		0.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_aue,			_T("AttUOffset"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_ATT_U_O,
 		p_default,		0.0f,
 		p_range, 		0.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_avs,			_T("AttVStart"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_ATT_V_S,
 		p_default,		1.0f,
 		p_range, 		0.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_ave,			_T("AttVOffset"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_ATT_V_O,
 		p_default,		0.0f,
 		p_range, 		0.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_aws,			_T("AttWStart"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_ATT_W_S,
 		p_default,		1.0f,
 		p_range, 		0.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_awe,			_T("AttWOffset"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_ATT_W_O,
 		p_default,		0.0f,
 		p_range, 		0.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_aruv,			_T("AttRoundUV"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_ATT_RUV,
 		p_default,		0.0f,
 		p_range, 		0.0f, 100.0f, 
-		end,
+		p_end,
 
 	uvw_axis,			_T("Axis"),		TYPE_INT, 	0,	IDS_SIMPLE,
 		p_default, 		2, 
-		end, 
+		p_end, 
 
 	uvw_normlize,		_T("Spl_Normalize"),	TYPE_BOOL, 	0,	IDS_SIMPLE,
 		p_default, 		FALSE, 
-		end, 
+		p_end, 
 
 	uvw_reverse,		_T("Spl_Reverse"),	TYPE_BOOL, 	0,	IDS_SIMPLE,
 		p_default, 		FALSE, 
-		end, 
+		p_end, 
 
 	uvw_normals,		_T("Spl_Normals"),	TYPE_INT, 	0,	IDS_SIMPLE,
 		p_default, 		2, 
-		end, 
+		p_end, 
 
 	uvw_ffm_thresh,		_T("FFM_Thresh"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_FFM_THRESH,
 		p_default,		0.0f,
 		p_range, 		0.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_map_channel,	_T("MapChannel"),	TYPE_INT, 	0,	IDS_SIMPLE,
 		p_default, 		1, 
-		end, 
+		p_end, 
 
 	uvw_move_u,			_T("umove"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_U_MOVE,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_rotate_u,		_T("urotate"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_U_ROTATE,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_scale_u,		_T("uscale"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_U_SCALE,
 		p_default,		1.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_move_v,			_T("vmove"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_V_MOVE,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_rotate_v,		_T("vrotatee"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_V_ROTATE,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_scale_v,		_T("vscale"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_V_SCALE,
 		p_default,		1.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_move_w,			_T("wmove"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_W_MOVE,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_rotate_w,		_T("wrotate"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_W_ROTATE,
 		p_default,		0.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_scale_w,		_T("wscale"),	TYPE_FLOAT,	P_ANIMATABLE,	IDS_TL_W_SCALE,
 		p_default,		1.0f,
 		p_range, 		-999999999.0f, 999999999.0f, 
-		end,
+		p_end,
 
 	uvw_xform_att,		_T("xform_att"),TYPE_BOOL, 	0,	IDS_SIMPLE,
 		p_default, 		FALSE, 
-		end, 
+		p_end, 
 
 	uvw_pelt_rigidity, 	_T("pelt_rigidity"), 		TYPE_FLOAT, 	P_ANIMATABLE, 	IDS_TL_PELT_K, 
 		p_default, 		0.05f, 
 		p_range, 		0.0f,1000.0f, 
-		end,
+		p_end,
 
 	uvw_pelt_stability, _T("pelt_stability"), 		TYPE_FLOAT, 	P_ANIMATABLE, 	IDS_TL_PELT_B, 
 		p_default, 		0.5f, 
 		p_range, 		0.0f,1000.0f, 
-		end,
+		p_end,
 
 	uvw_pelt_frame, 	_T("pelt_frame"), 	TYPE_FLOAT, 	P_ANIMATABLE, 	IDS_TL_PELT_FRAME, 
 		p_default, 		10.0f, 
 		p_range, 		0.0f,1000.0f, 
-		end,
+		p_end,
 
 	uvw_pelt_iter, 		_T("pelt_iter"), 	TYPE_INT, 	P_ANIMATABLE, 	IDS_TL_PELT_ITER, 
 		p_default, 		500, 
 		p_range, 		0,100000, 
-		end,
+		p_end,
 
 	uvw_pelt_border,	_T("pelt_move_border"),	TYPE_BOOL, 	0,	IDS_SIMPLE,
 		p_default, 		FALSE, 
-		end, 
+		p_end, 
 
 	uvw_frame_node, 	_T("frame_object"), 		TYPE_INODE, 	0,		IDS_SIMPLE,
-		end, 
+		p_end, 
 
 	uvw_spline_belt,	_T("spline_belt"),	TYPE_BOOL, 	0,	IDS_SIMPLE,
 		p_default, 		FALSE, 
-		end, 
+		p_end, 
 
 	uvw_normals_start, 	_T("normals_start"), 	TYPE_FLOAT, 	P_ANIMATABLE, 	IDS_TL_SPL_NORMALS_START, 
 		p_default, 		0.0f, 
 		p_range, 		-1.0f,1.0f, 
-		end,
+		p_end,
 
 	uvw_active_status,	_T("active_status"),	TYPE_BOOL, 	0,	IDS_SIMPLE,
 		p_default, 		TRUE, 
-		end, 
+		p_end, 
 
 	uvw_mapping_type,	_T("mapping_type"),	TYPE_INT, 	0,	IDS_SIMPLE,
 		p_default, 		0, 
-		end, 
+		p_end, 
 
 	uvw_spline_node,	_T("spline_node"),	TYPE_INODE, 	0,	IDS_SIMPLE,
 		p_sclassID,		SHAPE_CLASS_ID, 
-		end, 
-
-	end
+		p_end, 
+	p_end
 	);
 
 inline void XForm(Point3 &uvw, float &umove, float &vmove, float &wmove, float &urotate, float &vrotate, float &wrotate, float &uscale, float &vscale, float &wscale ) {
@@ -856,7 +875,9 @@ Point3 UVWProyector::NearestSplinePoint(Point3 punto, TimeValue t)
 							// 0 :  Inside the spline
 							// 1 :  Before the first point of the spline.
 							// 2 :  After the last point of the spline.
-	float prLen;
+	
+	// JW Code Change : fix uninitialized locals warning
+	float prLen=0.0;
 	Point3 pP;
 
 	Point3 p0,p1,p2,p3;
@@ -1029,8 +1050,8 @@ Point3 UVWProyector::NearestSplinePoint(Point3 punto, TimeValue t)
 				}
 			}
 		}
-
-	float U,V,W;
+	// JW Code Change : fix uninitialized locals warning
+	float U=0.0,V=0.0,W=0.0;
 	if (nearP) {
 		Point3 tan,nV,nxt;
 		if (zone == 0) {
@@ -1180,8 +1201,8 @@ Point3 UVWProyector::NearestGridPointOld(Point3 punto, TimeValue t) {
 	float grcrDist = BIGFLOAT;
 	Point3 bc;
 	BOOL inGrid = FALSE;
-	BOOL inCorner;
-	int face;
+	BOOL inCorner = FALSE;
+	int face = 0;
 	int hit = 0;
 	int hitBorde = 0;
 
@@ -1290,12 +1311,12 @@ Point3 UVWProyector::NearestGridPointOld(Point3 punto, TimeValue t) {
 	
 	dist = BIGFLOAT;
 
-	int v0,v1,v2,v3,sector = 0;
-	int vv0,vv1,vv2,vv3;
+	int v0=0,v1 = 0,v2 = 0,v3 = 0,sector = 0;	// JW: initialized to 0
+	int vv0 = 0,vv1 = 0,vv2 = 0,vv3 = 0;
 
 	int borde = 0;
 	float bvdist = BIGFLOAT;
-	float auxvd;
+	float auxvd = 0;
 
 	// Revisamos los 4 bordes para ver a donde nos acercamos mas...
 	// Este calculo de la distancia es hacia el borde, no hacia la generatriz de la
@@ -4089,7 +4110,7 @@ void UVWProyector::GMSetNumPoints(int npx, int npy, int shape, Point3 size, int 
 
 
 	int i,j;
-	float u,v,w;
+	float u, v, w = 0;
 	for (i=0; i<npx; i++)
 		for (j=0; j<npy; j++) {
 			u = float(i)/float(npx-1);
@@ -4965,8 +4986,13 @@ RefTargetHandle UVWProyector::Clone(RemapDir& remap) {
 	return ncuvp;
 	}
 
-
-RefResult UVWProyector::NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message) {
+// JW Code Change: NotifyRefChanged signature changed in 3ds Max 2015+
+#if MAX_VERSION_MAJOR < 17
+RefResult UVWProyector::NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message) 
+#else
+RefResult UVWProyector::NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate)
+#endif
+{
 	if ( hTarget == pblock ) {
 
 		int ti;
@@ -5528,7 +5554,8 @@ void UVWProyector::PeltBuildUpUVInfo(TimeValue t, MNMesh &mnMesh, BitArray fs, B
 
 	int good_border = -1;
 	int max_num_sel_edges = 0;
-	int num_border_verts;
+	// JW Code Change : fix uninitialized locals warning
+	int num_border_verts=0;
 
 	for ( int i_b=0; i_b<border.Num(); i_b++ ) {
 		int num_edges = border.Loop(i_b)->Count();
@@ -6427,7 +6454,7 @@ void UVWProyector::PeltMakeSymmetryPair() {
 	for ( int i_fs=0; i_fs<frame_segments.Count(); i_fs++ ) {
 		if ( frame_segments[i_fs]->selected ) {
 			if ( pair.x!=-1 && pair.y!=-1 ) {
-				MessageBox(GetCOREInterface()->GetMAXHWnd(),"Please Select just 2 Points","Texture Layers Pelt",MB_OK);
+				MessageBox(GetCOREInterface()->GetMAXHWnd(),_T("Please Select just 2 Points"),_T("Texture Layers Pelt"),MB_OK);
 				return;
 				}
 			if ( pair.x==-1 )
@@ -6502,7 +6529,7 @@ BOOL UVWProyector::PeltHitSubPoint(Box2D box, int &fs, int &bv) {
 void UVWProyector::PeltAddPoint(int i_fs, int bv) {
 	theHold.Begin();
 	theHold.Put( new PeltFrameRestore(this,tl) );
-	theHold.Accept(_T(GetString(IDS_PELT_FRAME)));
+	theHold.Accept( GetString(IDS_PELT_FRAME) );
 
 	Tab <IPoint2> add_fs;
 	add_fs.SetCount(2);
@@ -6633,7 +6660,7 @@ void UVWProyector::PeltDelPoints(int point) {
 
 	theHold.Begin();
 	theHold.Put( new PeltFrameRestore(this,tl) );
-	theHold.Accept(_T(GetString(IDS_PELT_FRAME)));
+	theHold.Accept( GetString(IDS_PELT_FRAME) );
 
 	Tab <int> delete_points;
 	delete_points.Resize(num_segments);
@@ -6666,7 +6693,7 @@ void UVWProyector::PeltDelPoints(int point) {
 	delete_points.Sort(CompTable);
 
 	if ( (frame_segments.Count()-delete_points.Count())<3 ) {
-		MessageBox(GetCOREInterface()->GetMAXHWnd(),"You must have at least 3 Frame Segments!","Texture Layers Pelt",MB_OK);
+		MessageBox(GetCOREInterface()->GetMAXHWnd(),_T("You must have at least 3 Frame Segments!"),_T("Texture Layers Pelt"),MB_OK);
 		}
 
 	for ( int i=0; i<delete_points.Count(); i++ ) {
@@ -6684,7 +6711,7 @@ void UVWProyector::PeltDelSinglePoint(int fs, BOOL hold) {
 	if ( hold ) {
 		theHold.Begin();
 		theHold.Put( new PeltFrameRestore(this,tl) );
-		theHold.Accept(_T(GetString(IDS_PELT_FRAME)));
+		theHold.Accept( GetString(IDS_PELT_FRAME) );
 		}
 
 	int fs0 = (fs-1+frame_segments.Count())%frame_segments.Count();
@@ -6811,7 +6838,7 @@ void UVWProyector::PeltSaveFrame(BitArray &face_sel, BitArray &edge_sel) {
 
 	int current_version = CURRENT_PELT_FILE_VERSION;
 
-	FILE *tf = fopen(fname, "wb");
+	FILE *tf = _tfopen(fname, _T("wb") );
 	
 	fwrite(&current_version, sizeof(current_version), 1, tf);
 	

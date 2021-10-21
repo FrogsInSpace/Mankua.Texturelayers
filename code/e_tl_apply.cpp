@@ -12,7 +12,7 @@
 #include "pblock.h"
 #include "meshadj.h"
 #include "uv_pelt_dlg.h"
-#include "..\texlay.h"
+#include "texlay.h"
 #include "random.h"
 
 Random r;
@@ -64,8 +64,8 @@ void MultiMapMod::ModifyObject(TimeValue t, ModContext &mc, ObjectState *os, INo
 		in_modify_object = FALSE;
 		}
 	in_modify_object = TRUE;
-
-	int i_f, i_v;
+	// JW Code change: i_g definition missing 
+	int i_f, i_v,i_g;
 
 	if (loadold) {
 		loadold = 0;
@@ -979,7 +979,10 @@ void MultiMapMod::ModifyObject(TimeValue t, ModContext &mc, ObjectState *os, INo
 
 void MultiMapMod::ComputeObjectCRC( Mesh &mesh, float &crc_geom, int &crc_topo ) {
 	crc_geom = 0.0f;
-	for ( int i_v=0; i_v<mesh.numVerts; i_v++ ) {
+	// JW Code change: pull implicit int declarations out of for loop 
+	int i_v,i_f;
+
+	for ( i_v=0; i_v<mesh.numVerts; i_v++ ) {
 		Point3 p = mesh.verts[i_v];
 		for ( int i=0; i<3; i++ ) {
 			crc_geom = crc_geom + fabs(p[i]);
@@ -991,7 +994,7 @@ void MultiMapMod::ComputeObjectCRC( Mesh &mesh, float &crc_geom, int &crc_topo )
 		}
 
 	crc_topo = 0;
-	for ( int i_f=0; i_f<mesh.numFaces; i_f++ ) {
+	for ( i_f=0; i_f<mesh.numFaces; i_f++ ) {
 		for ( i_v=0; i_v<3; i_v++ ) {
 			crc_topo = crc_topo + mesh.faces[i_f].v[i_v];
 			if ( crc_topo > CRC_TOPO_LIMIT ) {
@@ -1003,7 +1006,10 @@ void MultiMapMod::ComputeObjectCRC( Mesh &mesh, float &crc_geom, int &crc_topo )
 
 void MultiMapMod::ComputeObjectCRC( MNMesh &mnmesh, float &crc_geom, int &crc_topo ) {
 	crc_geom = 0.0f;
-	for ( int i_v=0; i_v<mnmesh.numv; i_v++ ) {
+	// JW Code change: pull implicit int declarations out of for loop 
+	int i_v, i_f;
+
+	for ( i_v=0; i_v<mnmesh.numv; i_v++ ) {
 		Point3 p = mnmesh.v[i_v].p;
 		for ( int i=0; i<3; i++ ) {
 			crc_geom = crc_geom + fabs(p[i]);
@@ -1015,7 +1021,7 @@ void MultiMapMod::ComputeObjectCRC( MNMesh &mnmesh, float &crc_geom, int &crc_to
 		}
 
 	crc_topo = 0;
-	for ( int i_f=0; i_f<mnmesh.numf; i_f++ ) {
+	for ( i_f=0; i_f<mnmesh.numf; i_f++ ) {
 		for ( i_v=0; i_v<mnmesh.f[i_f].deg; i_v++ ) {
 			crc_topo = crc_topo + mnmesh.f[i_f].vtx[i_v];
 			if ( crc_topo > CRC_TOPO_LIMIT ) {
@@ -1027,7 +1033,11 @@ void MultiMapMod::ComputeObjectCRC( MNMesh &mnmesh, float &crc_geom, int &crc_to
 
 void MultiMapMod::ComputeObjectCRC( PatchMesh &pmesh, float &crc_geom, int &crc_topo ) {
 	crc_geom = 0.0f;
-	for ( int i_v=0; i_v<pmesh.numVerts; i_v++ ) {
+
+	// JW Code change: pull implicit int declarations out of for loop 
+	int i_v, i_f;
+
+	for ( i_v=0; i_v<pmesh.numVerts; i_v++ ) {
 		Point3 p = pmesh.verts[i_v].p;
 		for ( int i=0; i<3; i++ ) {
 			crc_geom = crc_geom + fabs(p[i]);
@@ -1039,7 +1049,7 @@ void MultiMapMod::ComputeObjectCRC( PatchMesh &pmesh, float &crc_geom, int &crc_
 		}
 
 	crc_topo = 0;
-	for ( int i_f=0; i_f<pmesh.numPatches; i_f++ ) {
+	for (i_f=0; i_f<pmesh.numPatches; i_f++ ) {
 		for ( i_v=0; i_v<4; i_v++ ) {
 			crc_topo = crc_topo + pmesh.patches[i_f].v[i_v];
 			if ( crc_topo > CRC_TOPO_LIMIT ) {

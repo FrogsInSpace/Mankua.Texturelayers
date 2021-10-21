@@ -569,7 +569,7 @@ void UVPeltDlg::RegisterClasses() {
 		wc.cbClsExtra    = 0;
 		wc.cbWndExtra    = 0;
 		wc.lpfnWndProc   = UVPeltViewProc;
-		wc.lpszClassName = _T(GetString(IDS_PELT_VIEW_CLASS));
+		wc.lpszClassName = GetString(IDS_PELT_VIEW_CLASS);
 		RegisterClass(&wc);
 		}
 	}
@@ -882,8 +882,8 @@ int PeltMoveMode::subproc(HWND hWnd, int msg, int point, int flags, IPoint2 m) {
 				om = m;
 				}
 			else { // Second Click
-				theHold.Accept(_T(GetString(IDS_PELT_MOVEPOINTS)));
-				theHold.SuperAccept(_T(GetString(IDS_PELT_MOVEPOINTS)));
+				theHold.Accept( GetString(IDS_PELT_MOVEPOINTS) );
+				theHold.SuperAccept( GetString(IDS_PELT_MOVEPOINTS) );
 				}
 			break;
 
@@ -924,8 +924,8 @@ int PeltRotateMode::subproc(HWND hWnd, int msg, int point, int flags, IPoint2 m)
 				om = m;
 				}
 			else { // Second Click
-				theHold.Accept(_T(GetString(IDS_PELT_ROTATEPOINTS)));
-				theHold.SuperAccept(_T(GetString(IDS_PELT_ROTATEPOINTS)));
+				theHold.Accept( GetString(IDS_PELT_ROTATEPOINTS));
+				theHold.SuperAccept( GetString(IDS_PELT_ROTATEPOINTS));
 				}
 			break;
 
@@ -960,8 +960,8 @@ int PeltScaleMode::subproc(HWND hWnd, int msg, int point, int flags, IPoint2 m) 
 				om = m;
 				}
 			else { // Second Click
-				theHold.Accept(_T(GetString(IDS_PELT_SCALEPOINTS)));
-				theHold.SuperAccept(_T(GetString(IDS_PELT_SCALEPOINTS)));
+				theHold.Accept( GetString(IDS_PELT_SCALEPOINTS) );
+				theHold.SuperAccept( GetString(IDS_PELT_SCALEPOINTS) );
 				}
 			break;
 

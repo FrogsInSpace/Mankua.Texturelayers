@@ -16,20 +16,18 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// English (U.S.) resources
+// English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
 //
 
-IDD_MAP_ACQUIRE DIALOG  0, 0, 183, 52
+IDD_MAP_ACQUIRE DIALOG 0, 0, 183, 52
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Acquire UVW Mapping"
 FONT 8, "MS Sans Serif"
@@ -40,7 +38,7 @@ BEGIN
     CONTROL         "Acquire Absolute",IDC_ACQUIRE_ABS,"Button",BS_AUTORADIOBUTTON,21,26,69,10
 END
 
-IDD_TEXTURELAYERSMAP DIALOG  0, 0, 217, 156
+IDD_TEXTURELAYERSMAP DIALOG 0, 0, 217, 156
 STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -99,7 +97,7 @@ BEGIN
     GROUPBOX        "",IDC_STATIC,3,0,211,19
 END
 
-IDD_TL_SETNUM DIALOG  0, 0, 187, 46
+IDD_TL_SETNUM DIALOG 0, 0, 187, 46
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Number of Layers"
 FONT 8, "MS Sans Serif"
@@ -111,7 +109,7 @@ BEGIN
     RTEXT           "Number of Layers:",IDC_STATIC,13,17,63,8
 END
 
-IDD_MM_SETNUM DIALOG  0, 0, 187, 46
+IDD_MM_SETNUM DIALOG 0, 0, 187, 46
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Number of Channels"
 FONT 8, "MS Sans Serif"
@@ -123,14 +121,14 @@ BEGIN
     RTEXT           "Number of Channels:",IDC_STATIC,4,17,72,8
 END
 
-IDD_NURBS DIALOG  0, 0, 108, 55
+IDD_NURBS DIALOG 0, 0, 108, 55
 STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
 FONT 8, "MS Sans Serif"
 BEGIN
     CTEXT           "NURBS Objects are currently\nnot supported by this\nTexture Layers Beta Build.\nTo avoid unpredictable results\nplease remove Texture Layers\nmodifier.",IDC_STATIC,2,3,102,49
 END
 
-IDD_SM_UTILE DIALOG  0, 0, 370, 164
+IDD_SM_UTILE DIALOG 0, 0, 370, 164
 STYLE DS_SETFONT | DS_CENTER | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 CAPTION "Control Curve"
 FONT 8, "MS Sans Serif"
@@ -163,7 +161,7 @@ BEGIN
     GROUPBOX        "Set Number of Points",IDC_STATIC,7,7,91,60
 END
 
-IDD_TL_SETUVWATT DIALOG  0, 0, 278, 151
+IDD_TL_SETUVWATT DIALOG 0, 0, 278, 151
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "UVW Attenuation"
 FONT 8, "MS Sans Serif"
@@ -199,7 +197,7 @@ BEGIN
     CONTROL         "UV",IDC_UV,"Button",BS_AUTORADIOBUTTON,33,108,26,10
 END
 
-IDD_MAPOPTIONS DIALOG  0, 0, 137, 145
+IDD_MAPOPTIONS DIALOG 0, 0, 137, 145
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
 CAPTION "Texture Layers Options"
 FONT 8, "MS Sans Serif"
@@ -218,7 +216,7 @@ BEGIN
     CONTROL         "Compact UV Verts",IDC_TLO_COMPACT_TVERTS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,26,106,9
 END
 
-IDD_ATT DIALOG  0, 0, 217, 236
+IDD_ATT DIALOG 0, 0, 217, 236
 STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -269,7 +267,7 @@ BEGIN
     GROUPBOX        "",IDC_STATIC,3,0,211,19
 END
 
-IDD_MAP_ACQUIRETL DIALOG  0, 0, 183, 65
+IDD_MAP_ACQUIRETL DIALOG 0, 0, 183, 65
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Acquire Texture Layers Mapping"
 FONT 8, "MS Sans Serif"
@@ -285,7 +283,7 @@ BEGIN
     GROUPBOX        "",IDC_STATIC,7,0,169,58
 END
 
-IDD_TL_MAIN DIALOG  0, 0, 108, 238
+IDD_TL_MAIN DIALOG 0, 0, 108, 238
 STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -311,7 +309,7 @@ BEGIN
     GROUPBOX        "",IDC_STATIC,3,0,102,19
 END
 
-IDD_TL_MAPPING DIALOG  0, 0, 108, 80
+IDD_TL_MAPPING DIALOG 0, 0, 108, 80
 STYLE DS_SETFONT | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -393,7 +391,7 @@ BEGIN
     CTEXT           "Rotate",IDC_STATIC,44,135,26,8
 END
 
-IDD_TL_TOOLS DIALOG  0, 0, 108, 96
+IDD_TL_TOOLS DIALOG 0, 0, 108, 96
 STYLE DS_SETFONT | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -448,14 +446,14 @@ BEGIN
     LTEXT           "Number of points:",IDC_FFM_TEXT,9,12,61,10
 END
 
-IDD_DUMMY DIALOG  0, 0, 217, 18
+IDD_DUMMY DIALOG 0, 0, 217, 18
 STYLE DS_SETFONT | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "Not Authorized...!",IDC_STATIC,81,5,56,8
 END
 
-IDD_TL_PELT DIALOG  0, 0, 108, 116
+IDD_TL_PELT DIALOG 0, 0, 108, 116
 STYLE DS_SETFONT | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -479,7 +477,7 @@ BEGIN
     PUSHBUTTON      "Load Layout",IDC_TLP_LOAD_FRAME,55,97,45,12
 END
 
-IDD_PELT_DLG DIALOG  0, 0, 257, 217
+IDD_PELT_DLG DIALOG 0, 0, 257, 217
 STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_VISIBLE | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 CAPTION "Edit Pelt Layout"
 FONT 8, "MS Sans Serif"
@@ -488,7 +486,7 @@ BEGIN
     CONTROL         "Custom1",IDC_PELT_VIEW,"UVPeltViewClass",WS_TABSTOP,4,21,249,192
 END
 
-IDD_TL_FRAME DIALOG  0, 0, 108, 28
+IDD_TL_FRAME DIALOG 0, 0, 108, 28
 STYLE DS_SETFONT | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -496,7 +494,7 @@ BEGIN
     GROUPBOX        "Frame Mapping",IDC_STATIC_FFM,1,0,106,27
 END
 
-IDD_TL_DATA DIALOG  0, 0, 108, 30
+IDD_TL_DATA DIALOG 0, 0, 108, 30
 STYLE DS_SETFONT | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -505,7 +503,7 @@ BEGIN
     GROUPBOX        "",IDC_STATIC,2,2,104,26
 END
 
-IDD_IO_DLG DIALOG  0, 0, 172, 165
+IDD_IO_DLG DIALOG 0, 0, 172, 165
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Save Texture Layers Groups"
 FONT 8, "MS Sans Serif"
@@ -523,7 +521,7 @@ STYLE DS_SETFONT | WS_POPUP | WS_VISIBLE
 EXSTYLE WS_EX_APPWINDOW
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
-    CONTROL         233,IDC_STATIC,"Static",SS_BITMAP,0,0,290,319
+    CONTROL         IDB_TEXLAY2_ABOUT,IDC_STATIC,"Static",SS_BITMAP,0,0,290,319
 END
 
 
@@ -562,7 +560,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_MAP_ACQUIRE, DIALOG
     BEGIN
@@ -707,6 +705,10 @@ BEGIN
         RIGHTMARGIN, 165
         TOPMARGIN, 7
     END
+
+    IDD_ABOUT_DLG, DIALOG
+    BEGIN
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -756,24 +758,43 @@ END
 //
 
 IDB_BACKS               BITMAP                  "back1.bmp"
+
 IDB_BACKS_MASK          BITMAP                  "back_mas.bmp"
+
 IDB_UTILETOOL           BITMAP                  "unwrapto.bmp"
+
 IDB_MASK_UTILETOOL      BITMAP                  "mask_unw.bmp"
+
 IDB_MANKUA_LOGO         BITMAP                  "mankua.bmp"
+
 IDB_PELT                BITMAP                  "bitmap1.bmp"
+
 IDB_PELT_MASK           BITMAP                  "bmp00002.bmp"
+
 IDB_BULBS               BITMAP                  "bulbs.bmp"
+
 IDB_BULBS_MASK          BITMAP                  "bulbs_ma.bmp"
+
 IDB_TL_TOOLBAR          BITMAP                  "bmp00003.bmp"
+
 IDB_TL_TOOLBAR_MASK     BITMAP                  "bmp00004.bmp"
+
 IDB_MAP_TYPES           BITMAP                  "map_type.bmp"
+
 IDB_MAP_TYPES_MASK      BITMAP                  "bmp00005.bmp"
+
 IDB_16BUTS              BITMAP                  "bmp16but.bmp"
+
 IDB_16BUTS_MASK         BITMAP                  "bmp00001.bmp"
+
 IDB_TEXLAY_ATT          BITMAP                  "texlay_a.bmp"
+
 IDB_TEXLAY_ATT_MASK     BITMAP                  "bmp00006.bmp"
+
 IDB_DCP                 BITMAP                  "dcp.bmp"
+
 IDB_TEXLAY2_ABOUT       BITMAP                  "TexLay2About.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -781,46 +802,55 @@ IDB_TEXLAY2_ABOUT       BITMAP                  "TexLay2About.bmp"
 //
 
 IDC_MOVE_X              CURSOR                  "cur00004.cur"
+
 IDC_MOVE_Y              CURSOR                  "cursor2.cur"
+
 IDC_ZOOM                CURSOR                  "cur00003.cur"
+
 IDC_PAN                 CURSOR                  "cur00005.cur"
+
 IDC_ADD_POINT           CURSOR                  "cur00007.cur"
+
 IDC_DEL_POINT           CURSOR                  "cur00006.cur"
+
 IDC_DRAGCURSOR          CURSOR                  "cursor1.cur"
+
 IDC_SCALE_X             CURSOR                  "scale_x.cur"
+
 IDC_SCALE_Y             CURSOR                  "scale_y.cur"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_DC_TEXLAYERS        "Texture Layers"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_MM_CLASS            "TexLay"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_DC_TEXTURELAYERS    "Texture Layers"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_DC_APPARATUS        "Gizmo"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_DC_PARAMETERS       "Parameters"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_RB_LENGTH           "Length"
     IDS_DC_MULTICOMP        "Texture Layers Composite"
@@ -837,13 +867,13 @@ BEGIN
     IDS_PICKSPLINE          "Pick Spline"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_RB_WIDTH            "Width"
     IDS_RB_HEIGHT           "Height"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_CC_MOVE             "Move"
     IDS_CC_ADD              "Add Point"
@@ -863,7 +893,7 @@ BEGIN
     IDS_TL_SAVECURTITLE     "Save Current Channel"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_TL_FILEEXISTS       "%s already exists.\nDo you want to replace it?"
     IDS_SAVE_CUR            "Save Current Channel"
@@ -883,7 +913,7 @@ BEGIN
     IDS_TL_MERGETITLE       "Merge Channels"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_TL_REPLACEALLTITLE  "Load and Replace All Channels"
     IDS_TL_REPLACECURTITLE  "Load and Replace Current Current"
@@ -903,7 +933,7 @@ BEGIN
     IDS_DC_ATTMAP           "TL Att"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_DC_ATTPARAMS        "Attenuation Map Parameters"
     IDS_DS_RED              "Red"
@@ -923,7 +953,7 @@ BEGIN
     IDS_MAPTYPE_CYLCAP      "Cylindrical Cap"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_MAPTYPE_SPHERE      "Spherical"
     IDS_MAPTYPE_SHRINK      "Shrink Wrap"
@@ -943,7 +973,7 @@ BEGIN
     IDS_DC_OUTVEC           "Out Vector %d"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_GRIDMESH_CLASS      "UVWGrid"
     IDS_DC_HEIGHT           "Height:"
@@ -963,7 +993,7 @@ BEGIN
     IDS_TL_ATT_U_S          "Att U Start"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_TL_ATT_U_O          "Att U Offset"
     IDS_TL_ATT_V_S          "Att V Start"
@@ -983,7 +1013,7 @@ BEGIN
     IDS_TL_V_MOVE           "Move V"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_TL_W_MOVE           "Move W"
     IDS_TL_U_SCALE          "Scale U"
@@ -1003,7 +1033,7 @@ BEGIN
     IDS_TLP_MOVE            "Move"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_TLP_MOVE_X          "Move X"
     IDS_TLP_MOVE_Y          "Move Y"
@@ -1023,7 +1053,7 @@ BEGIN
     IDS_TL_V_ROTATE         "Rotate V"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_TL_W_ROTATE         "Rotate W"
     IDS_PELT_SYMM           "Symmetry"
@@ -1043,16 +1073,25 @@ BEGIN
     IDS_TLP_SCALE           "Scale"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_TLP_SCALE_X         "Scale X"
     IDS_TLP_SCALE_Y         "Scale Y"
     IDS_TLP_ROTATE          "Rotate"
     IDS_PELT_ROTATEPOINTS   "Rotate Points"
     IDS_PELT_SCALEPOINTS    "Scale Points"
+    IDS_ATT_FACE            "Use face selection"
+    IDS_ATT_MOD             "Use modifier selection"
+    IDS_ATT_TYPE            "type"
+    IDS_ATT_CENTER          "Center"
+    IDS_ATT_START           "Start"
+    IDS_ATT_OFFSET          "Offset"
+    IDS_ATT_INSIDE          "Inside"
+    IDS_ATT_OUTSIDE         "Outside"
+    IDS_ATT_NORMAL          "Normal"
 END
 
-#endif    // English (U.S.) resources
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

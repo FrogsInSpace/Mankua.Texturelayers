@@ -722,6 +722,15 @@
 #define IDS_TLP_ROTATE                  40530
 #define IDS_PELT_ROTATEPOINTS           40531
 #define IDS_PELT_SCALEPOINTS            40532
+#define IDS_ATT_FACE                    40533
+#define IDS_ATT_MOD                     40534
+#define IDS_ATT_TYPE                    40535
+#define IDS_ATT_CENTER                  40536
+#define IDS_ATT_START                   40537
+#define IDS_ATT_OFFSET                  40538
+#define IDS_ATT_INSIDE                  40539
+#define IDS_ATT_OUTSIDE                 40540
+#define IDS_ATT_NORMAL                  40541
 #define IDC_STATIC                      -1
 
 // Next default values for new objects

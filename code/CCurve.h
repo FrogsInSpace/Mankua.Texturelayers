@@ -272,8 +272,12 @@ class CurveDlg : public ReferenceMaker, public TimeChangeCallback {
 
 		void TimeChanged(TimeValue t) {InvalidateView();}
 
-		RefResult NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, 
-	         PartID& partID,  RefMessage message);
+// JW Code Change: NotifyRefChanged signature changed in 3ds Max 2015+
+#if MAX_VERSION_MAJOR < 17
+		RefResult NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message);
+#else
+		RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
+#endif
 		int NumRefs() {return 1;}
 		RefTargetHandle GetReference(int i) {return mmod;}
 		void SetReference(int i, RefTargetHandle rtarg) {mmod=(ReferenceTarget*)rtarg;}

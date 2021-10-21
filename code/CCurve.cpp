@@ -149,7 +149,7 @@ void ControlCurve::Select(Tab<int> &hits,BOOL toggle,BOOL subtract,BOOL all)
 void ControlCurve::SetFullXPoint(float x) 
 	{
 	int numSel = 0;
-	int sel;
+	int sel=0;
 	for (int i=0; i<NumPoints(); i++) 
 		if (IsSel(i)) {
 			numSel++;
@@ -168,7 +168,7 @@ void ControlCurve::SetFullXPoint(float x)
 void ControlCurve::SetFullYPoint(float y) 
 	{
 	int numSel = 0;
-	int sel;
+	int sel=0;
 	for (int i=0; i<NumPoints(); i++) 
 		if (IsSel(i)) {
 			numSel++;
@@ -727,11 +727,12 @@ BOOL CurveDlg::IsActive() {
 	else return 0;
 	}
 
-RefResult CurveDlg::NotifyRefChanged(
-		Interval changeInt, 
-		RefTargetHandle hTarget, 
-     	PartID& partID,  
-     	RefMessage message)
+//JW Code Change: NotifyRefChanged Signuature changed with Max2015+
+#if MAX_VERSION_MAJOR < 17
+RefResult CurveDlg::NotifyRefChanged( Interval changeInt, RefTargetHandle hTarget, PartID& partID,  RefMessage message)
+#else
+RefResult CurveDlg::NotifyRefChanged( const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate)
+#endif
 	{
 	switch (message) {
 		case REFMSG_CHANGE:

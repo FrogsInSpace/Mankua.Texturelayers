@@ -393,7 +393,13 @@ friend BOOL CALLBACK FlatMapsDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM
 		void UpdatePBlockParam(int id);
 
 		void CloseCurveDlgs();
+
+//JW Code Change: GetObjectName singature changed with 3ds Max 2013+
+#if MAX_VERSION_MAJOR < 15
 		TCHAR *GetObjectName() { return GetString(IDS_DC_TEXLAYERS); }
+#else
+		const TCHAR *GetObjectName() { return GetString(IDS_DC_TEXLAYERS); }
+#endif
 		CreateMouseCallBack* GetCreateMouseCallBack() {return NULL;} 
 //		BOOL AssignController(Animatable *control,int subAnim);
 		int SubNumToRefNum(int subNum);
@@ -439,8 +445,13 @@ friend BOOL CALLBACK FlatMapsDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM
 		RefTargetHandle Clone(RemapDir& remap = DefaultRemapDir());
 #endif
 
+// JW Code Change: NotifyRefChanged signature changed in 3ds Max 2015+
+#if MAX_VERSION_MAJOR < 17
 		RefResult NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message);
-		
+#else
+		RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
+#endif
+
 		int NumSubObjTypes();
 		ISubObjType *GetSubObjType(int i);
 		void ActivateSubobjSel(int level, XFormModes& modes);
