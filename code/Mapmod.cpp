@@ -136,6 +136,11 @@ class UVWMapClassDesc:public ClassDesc2 {
 	int 			IsPublic() { return 1; }
 	void *			Create(BOOL loading = FALSE) {return new MultiMapMod(!loading);}
 	const TCHAR *	ClassName() { return GetString(IDS_MM_CLASS); }
+	
+#if MAX_VERSION_MAJOR >= 24
+	const TCHAR *	NonLocalizedClassName() { return ClassName(); }
+#endif
+
 	SClass_ID		SuperClassID() { return OSM_CLASS_ID; }
 	Class_ID		ClassID() { return MULTIMAP_MOD_CID; }
 	const TCHAR* 	Category() {return GetString(IDS_DC_TEXTURELAYERS);}
@@ -208,7 +213,12 @@ void MultiMapMod::ViewportAlign() {
 	ntm.NoScale();
 
 	// MC tm
+#if MAX_VERSION_MAJOR < 24	
 	Matrix3 mctm(1);
+#else
+	Matrix3 mctm;
+#endif
+
 	if (mcList[0]->tm) mctm = *mcList[0]->tm;
 
 	// Compute the new destination transform for tmCont
@@ -226,7 +236,12 @@ void MultiMapMod::ViewportAlign() {
 		}
 
 	// Current val of tmCont
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 curTM(1);
+#else
+	Matrix3 curTM;
+#endif
+
 	uvwProy[current_channel]->tmControl->GetValue(ip->GetTime(),&curTM,FOREVER,CTRL_RELATIVE);
 
 	Point3 s;
@@ -325,7 +340,12 @@ void FaceAlignMouseProc::FaceAlignMap(HWND hWnd,IPoint2 m)
 			pt = ray.p + ray.dir * at;
 					
 			// Get the mod context tm
+#if MAX_VERSION_MAJOR < 24
 			Matrix3 tm(1);
+#else
+			Matrix3 tm;
+#endif
+
 			if (mcList[0]->tm) tm = tm * *mcList[0]->tm;
 		
 			// Transform the point and ray into mod context space
@@ -346,7 +366,13 @@ void FaceAlignMouseProc::FaceAlignMap(HWND hWnd,IPoint2 m)
 					break;
 				}
 			// Our current transformation... gives relative TM
+
+#if MAX_VERSION_MAJOR < 24
 			Matrix3 curTM(1), relTM, id(1);
+#else
+			Matrix3 curTM, relTM, id;
+#endif
+
 			mod->uvwProy[mod->current_channel]->tmControl->GetValue(t,&curTM,valid,CTRL_RELATIVE);
 			relTM = Inverse(curTM) * destTM;
 		
@@ -441,11 +467,23 @@ void RegionFitMouseProc::RegionFitMap(HWND hWnd,IPoint2 m)
 	Matrix3 ntm = nodeList[0]->GetObjectTM(ip->GetTime());	
 	
 	// MC tm
+
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 mctm(1);
+#else
+	Matrix3 mctm;
+#endif
+
 	if (mcList[0]->tm) mctm = *mcList[0]->tm;
 
 	// Current val of tmCont.. remove any scale
+
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 ctm(1);
+#else
+	Matrix3 ctm;
+#endif
+
 	mod->uvwProy[mod->current_channel]->tmControl->GetValue(ip->GetTime(),&ctm,FOREVER,CTRL_RELATIVE);
 	AffineParts parts;
 	decomp_affine(ctm, &parts);
@@ -779,8 +817,20 @@ void PickAcquire::AcquireMapping(
 		}
 	else {
 		// Build the mats
+
+#if MAX_VERSION_MAJOR < 24
 		Matrix3 fromNTM(1);
+#else
+		Matrix3 fromNTM;
+#endif
+
+
+#if MAX_VERSION_MAJOR < 24
 		Matrix3 toNTM(1);
+#else
+		Matrix3 toNTM;
+#endif
+
 		if (type==IDC_ACQUIRE_ABSTL) {
 			fromNTM = fromNode->GetObjectTM(ip->GetTime());	
 			toNTM   = toNode->GetObjectTM(ip->GetTime());	
@@ -2052,8 +2102,11 @@ Animatable* MultiMapMod::SubAnim(int i)
 	{
 	return uvwProy[i];
 	}
-
+#if MAX_VERSION_MAJOR < 24
 TSTR MultiMapMod::SubAnimName(int i)
+#else
+TSTR MultiMapMod::SubAnimName(int i, bool localized )
+#endif
 	{
 	if (i >= uvwProy.Count()) return _T("");
 
@@ -2472,7 +2525,13 @@ void MultiMapMod::ShapeFFGPoints(INode *surf) {
 		ObjectState os = surf->EvalWorldState(0);
 		Matrix3 surfTM = surf->GetObjTMBeforeWSM(t,&iv);
 
+
+#if MAX_VERSION_MAJOR < 24
 		Matrix3 mTM(1);
+#else
+		Matrix3 mTM;
+#endif
+
 		uvwProy[current_channel]->tmControl->GetValue(t,&mTM,FOREVER,CTRL_RELATIVE);
 		mTM.PreRotateZ(PI);
 
@@ -2532,7 +2591,13 @@ void* MultiMapMod::GetInterface(ULONG id)
 // 
 Matrix3 MultiMapMod::GenMatrix(TimeValue t,ModContext *mc)
 	{
+
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 tm(1);
+#else
+	Matrix3 tm;
+#endif
+
 	Interval valid;
 	tm.SetTrans(Point3(0.5f,0.5f,0.5f));
 
@@ -4432,7 +4497,16 @@ int MultiMapMod::HitTest( TimeValue t, INode* inode, int type, int crossing, int
 void MultiMapMod::GetSubObjectCenters(SubObjAxisCallback *cb,TimeValue t,INode *node,ModContext *mc)
 	{
 	int level = ip->GetSubObjectLevel();
-	Matrix3 modmat(1), ntm = node->GetObjectTM(t);	
+	
+
+#if MAX_VERSION_MAJOR < 24
+	Matrix3 modmat(1);
+#else
+	Matrix3 modmat;
+
+#endif
+
+	Matrix3 ntm(node->GetObjectTM(t) );
 
 	modmat = uvwProy[current_channel]->CompMatrix(t,mc,&ntm);
 
@@ -4576,7 +4650,13 @@ void MultiMapMod::Move(TimeValue t, Matrix3& partm, Matrix3& tmAxis, Point3& val
 	else if ( level==SEL_POINTS) {
 		uvwProy[current_channel]->gm->PlugControllers(t);
 		// Compute a matrix to move points
+
+#if MAX_VERSION_MAJOR < 24
 		Matrix3 ctm(1);
+#else
+		Matrix3 ctm;
+#endif
+
 		uvwProy[current_channel]->tmControl->GetValue(t,&ctm,FOREVER,CTRL_RELATIVE);
 		ctm.PreRotateZ(PI);
 		Matrix3 tm  = ctm * partm * Inverse(tmAxis);
@@ -4622,7 +4702,13 @@ void MultiMapMod::Rotate(TimeValue t, Matrix3& partm, Matrix3& tmAxis, Quat& val
 	else if ( level==SEL_POINTS) {
 		uvwProy[current_channel]->gm->PlugControllers(t);
 		// Compute a matrix to move points
+
+#if MAX_VERSION_MAJOR < 24
 		Matrix3 ctm(1);
+#else
+		Matrix3 ctm;
+#endif
+
 		uvwProy[current_channel]->tmControl->GetValue(t,&ctm,FOREVER,CTRL_RELATIVE);
 		ctm.PreRotateZ(PI);
 		Matrix3 tm  = ctm * partm * Inverse(tmAxis);
@@ -4669,7 +4755,13 @@ void MultiMapMod::Scale(TimeValue t, Matrix3& partm, Matrix3& tmAxis, Point3& va
 	else if ( level==SEL_POINTS) {
 		uvwProy[current_channel]->gm->PlugControllers(t);
 		// Compute a matrix to move points
+
+#if MAX_VERSION_MAJOR < 24
 		Matrix3 ctm(1);
+#else
+		Matrix3 ctm;
+#endif
+
 		uvwProy[current_channel]->tmControl->GetValue(t,&ctm,FOREVER,CTRL_RELATIVE);
 		ctm.PreRotateZ(PI);
 		Matrix3 tm  = ctm * partm * Inverse(tmAxis);
@@ -5345,7 +5437,13 @@ void MultiMapMod::SaveTL( BitArray &sel_groups ) {
 					}
 				}
 			// NEW IN TEXLAY 2.0			
+
+#if MAX_VERSION_MAJOR < 24
 			Matrix3 mapTM(1);
+#else
+			Matrix3 mapTM;
+#endif
+
 			uvwProy[i]->tmControl->GetValue(t,&mapTM,FOREVER,CTRL_RELATIVE);
 			fwrite(&mapTM,sizeof(float), 12, tf);
 
@@ -6249,7 +6347,16 @@ void MultiMapMod::AlignToSelection() {
 		if (md == NULL) 
 			continue;
 
+
+#if MAX_VERSION_MAJOR < 24
 		Matrix3 mctm(1);
+#else
+		Matrix3 mctm;
+#endif
+
+
+
+
 		if ( mcList[i_mc]->tm )
 			mctm = *mcList[i_mc]->tm;
 				

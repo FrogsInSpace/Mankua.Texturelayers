@@ -38,6 +38,11 @@ class GridMeshClassDesc:public ClassDesc2 {
 	int 			IsPublic() { return 0; }
 	void *			Create(BOOL loading = FALSE) { return new GridMesh(0,loading);}
 	const TCHAR *	ClassName() { return GetString(IDS_GRIDMESH_CLASS); }
+
+#if MAX_VERSION_MAJOR >= 24
+	const TCHAR *	NonLocalizedClassName() { return ClassName(); }
+#endif
+
 	SClass_ID		SuperClassID() { return UVW_SCID; }
 	Class_ID		ClassID() { return GRID_MESH_CID; }
 	const TCHAR* 	Category() {return GetString(IDS_DC_TEXTURELAYERS);}
@@ -431,6 +436,10 @@ class UVWProyClassDesc:public ClassDesc2 {
 	int 			IsPublic() { return 0; }
 	void *			Create(BOOL loading = FALSE) { return new UVWProyector(!loading);}
 	const TCHAR *	ClassName() { return GetString(IDS_UVWPROY_CLASS); }
+
+#if MAX_VERSION_MAJOR >= 24
+	const TCHAR *	NonLocalizedClassName() { return ClassName(); }
+#endif 
 	SClass_ID		SuperClassID() { return UVW_SCID; }
 	Class_ID		ClassID() { return UVW_PROY_CID; }
 	const TCHAR* 	Category() {return GetString(IDS_DC_TEXTURELAYERS);}
@@ -666,7 +675,12 @@ static ParamBlockDesc2 uvw_proy_param_blk ( uvw_proy_params, _T("UVWProyector"),
 
 inline void XForm(Point3 &uvw, float &umove, float &vmove, float &wmove, float &urotate, float &vrotate, float &wrotate, float &uscale, float &vscale, float &wscale ) {
 	uvw = uvw - Point3(0.5f,0.5f,0.0f);
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 m(1);
+#else
+	Matrix3 m;
+#endif
+
 	m.SetTrans(Point3(0.5f,0.5f,0.0f));
 	m.PreRotateX(PI*urotate/180.0f);
 	m.PreRotateY(PI*vrotate/180.0f);
@@ -682,7 +696,13 @@ inline void UnXForm(Point3 &uvw, float &umove, float &vmove, float &wmove, float
 	uvw.y = ( uvw.y - vmove ) / vscale;
 	uvw.z = ( uvw.z - wmove ) / wscale;
 
+
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 m(1);
+#else
+	Matrix3 m;
+#endif
+
 	m.SetTrans(Point3(0.5f,0.5f,0.0f));
 	m.PreRotateX(PI*urotate/180.0f);
 	m.PreRotateY(PI*vrotate/180.0f);
@@ -830,7 +850,13 @@ SClass_ID UVWProyector::SuperClassID() {
 
 Interval UVWProyector::LocalValidity(TimeValue t) {
 	if (tmControl) {
+
+#if MAX_VERSION_MAJOR < 24
 		Matrix3 tm(1);
+#else
+		Matrix3 tm;
+#endif
+
 		tmControl->GetValue(t,&tm,ivalid,CTRL_RELATIVE);
 		}
 
@@ -1873,7 +1899,13 @@ Point3 UVWProyector::GetPosition(TimeValue t, float u, float v, float w, int giz
 
 	// Luego paso de espacio UVW a XYZ
 	Point3 p;
+
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 tm(1);
+#else
+	Matrix3 tm;
+#endif 
+
 	switch (mapping_type) {
 		case MAP_TL_SPLINE: {
 			Point3 ns,ne;
@@ -2006,7 +2038,13 @@ Point3 UVWProyector::GetPosition(TimeValue t, float u, float v, float w, int giz
 			p.x *= gizmo_width/2.0f;
 			p.y *= gizmo_length/2.0f;
 			p.z *= gizmo_height;
+
+#if MAX_VERSION_MAJOR < 24
 			Matrix3 tm(1);
+#else
+			Matrix3 tm;
+#endif
+
 			tm.PreRotateZ(-HALFPI);
 			switch (GetAxis()) {
 				case 0:
@@ -5092,7 +5130,13 @@ Animatable* UVWProyector::SubAnim(int i) {
 		}
 	}
 
-TSTR UVWProyector::SubAnimName(int i) { 
+#if MAX_VERSION_MAJOR < 24
+TSTR UVWProyector::SubAnimName(int i) 
+#else
+TSTR UVWProyector::SubAnimName(int i, bool localized) 
+#endif
+
+{ 
 	switch(i) {
 		case 0:				return _T("Gizmo");
 		case 1:				return GetString(IDS_TL_PARAMETERS);
@@ -5110,7 +5154,13 @@ int UVWProyector::SubNumToRefNum(int subNum){
 
 Matrix3 UVWProyector::CompMatrix(TimeValue t,ModContext *mc, Matrix3 *ntm,BOOL applySize, BOOL applyAxis)
 	{
+
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 tm(1);
+#else
+	Matrix3 tm;
+#endif
+
 	Interval valid;
 	
 	int type = GetMappingType();
@@ -5182,7 +5232,13 @@ Matrix3 UVWProyector::CompMatrix(TimeValue t,ModContext *mc, Matrix3 *ntm,BOOL a
 
 Matrix3 UVWProyector::CGMatrix(TimeValue t)
 	{
+
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 tm(1);
+#else
+	Matrix3 tm;
+#endif
+
 	Interval valid;
 	
 	int type = GetMappingType();
@@ -5288,7 +5344,13 @@ void UVWProyector::InitControl( ModContext &mc,Object *obj,int type,TimeValue t 
 	parts.q.MakeMatrix(tm);
 	tm.Translate(parts.t);
 	
+
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 mctm(1);
+#else
+	Matrix3 mctm;
+#endif
+
 	if (mc.tm) mctm = *mc.tm;
 	tm.Scale(Point3(
 		Length(mctm.GetRow(0)),
@@ -5368,8 +5430,15 @@ void UVWProyector::InitControl( ModContext &mc,Object *obj,int type,TimeValue t 
 
 		SetXFormPacket pckt(
 			cent, //sbox.Center(),
+
+#if MAX_VERSION_MAJOR < 24
 			Matrix3(1),
-			Matrix3(1));
+			Matrix3(1),
+#else
+			Matrix3(),
+			Matrix3()
+#endif
+		);
 			//Inverse(oldtm));
 		
 		SuspendAnimate();
@@ -5384,7 +5453,13 @@ void UVWProyector::InitControl( ModContext &mc,Object *obj,int type,TimeValue t 
 		AnimateOff();
 
 		// Clear out any scale in the transform
+
+#if MAX_VERSION_MAJOR < 24
 		tm = Matrix3(1);	
+#else
+		tm = Matrix3();
+#endif
+
 		tmControl->GetValue(t,&tm,FOREVER,CTRL_RELATIVE);	
 		decomp_affine(tm, &parts);
 		parts.q.MakeMatrix(tm);
@@ -6423,7 +6498,13 @@ void UVWProyector::PeltStepRotatePoints(float ang) {
 		}
 	Point3 center = border_box.Center();
 
+
+#if MAX_VERSION_MAJOR < 24
 	Matrix3 rot_m(1);
+#else
+	Matrix3 rot_m;
+#endif
+
 	rot_m.SetTrans(center);
 	Matrix3 i_m = Inverse(rot_m);
 	rot_m.PreRotateZ(ang);

@@ -138,16 +138,32 @@ class AttMap: public MultiTex {
 		int NumSubTexmaps() { return NSUBTEX; }
 		Texmap* GetSubTexmap(int i) { return subTex[i]; }
 		void SetSubTexmap(int i, Texmap *m);
+
+#if MAX_VERSION_MAJOR < 24
 		TSTR GetSubTexmapSlotName(int i);
+#else
+		TSTR GetSubTexmapSlotName(int i,  bool localized = false);
+#endif
 
 		Class_ID ClassID() {	return ATTMAP_CID; }
 		SClass_ID SuperClassID() { return TEXMAP_CLASS_ID; }
+
+#if MAX_VERSION_MAJOR < 24
 		void GetClassName(TSTR& s) { s= GetString(IDS_DC_ATTMAP); }  
+#else
+		void GetClassName(TSTR& s, bool localized = false) { s = GetString(IDS_DC_ATTMAP); }
+#endif
 		void DeleteThis() { delete this; }	
 
 		int NumSubs() { return 1+NSUBTEX; }  
 		Animatable* SubAnim(int i);
+
+#if MAX_VERSION_MAJOR < 24
 		TSTR SubAnimName(int i);
+#else
+		TSTR SubAnimName(int i, bool localized = false );
+#endif
+
 		int SubNumToRefNum(int subNum) { return subNum; }
 
 		// From ref

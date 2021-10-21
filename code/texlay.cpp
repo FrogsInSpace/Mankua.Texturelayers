@@ -191,16 +191,35 @@ class TextureLayers: public MultiTex
 		int NumSubTexmaps() {return subTex.Count();}
 		Texmap* GetSubTexmap(int i) {return subTex[i];}		
 		void SetSubTexmap(int i, Texmap *m);
+		
+#if MAX_VERSION_MAJOR < 24		
 		TSTR GetSubTexmapSlotName(int i);		
+#else
+		TSTR GetSubTexmapSlotName(int i, bool localized = false );
+#endif
 
 		Class_ID ClassID() {return TEXTURELAYERS_CID;}
 		SClass_ID SuperClassID() {return TEXMAP_CLASS_ID;}
+
+#if MAX_VERSION_MAJOR < 24
 		void GetClassName(TSTR& s) {s=GetString(IDS_DC_MULTICOMP);}
+#else
+		void GetClassName( TSTR& s, bool localized = false) { s = GetString(IDS_DC_MULTICOMP); };
+#endif
+
+
 		void DeleteThis() {delete this;}
 
 		int NumSubs() {return subTex.Count();}
 		Animatable* SubAnim(int i) {return subTex[i];}
+
+#if MAX_VERSION_MAJOR < 24
 		TSTR SubAnimName(int i);
+#else
+		TSTR SubAnimName(int i, bool localized = false );
+#endif
+
+
 		int SubNumToRefNum(int subNum) {return subNum;}
 
 		// From ref
@@ -274,6 +293,12 @@ class TextureLayersClassDesc:public ClassDesc2 {
 	int 			IsPublic() {return 1;}
 	void *			Create(BOOL loading) {return new TextureLayers;}
 	const TCHAR *	ClassName() {return GetString(IDS_DC_MULTICOMP);}
+
+#if MAX_VERSION_MAJOR >= 24
+	const TCHAR *	NonLocalizedClassName() { return ClassName(); }
+#endif
+
+
 	SClass_ID		SuperClassID() {return TEXMAP_CLASS_ID;}
 	Class_ID 		ClassID() {return TEXTURELAYERS_CID;}
 	const TCHAR* 	Category() {return TEXMAP_CAT_COMP;}
@@ -1561,14 +1586,24 @@ void TextureLayers::SetSubTexmap(int i, Texmap *m) {
 	if (paramDlg)
 		paramDlg->UpdateSubTexNames();
 	}
-
-TSTR TextureLayers::GetSubTexmapSlotName(int i) {
+#if MAX_VERSION_MAJOR < 24
+TSTR TextureLayers::GetSubTexmapSlotName(int i) 
+#else
+TSTR TextureLayers::GetSubTexmapSlotName(int i, bool localized )
+#endif
+{
 	TSTR buf;
 	buf.printf(_T("%s %d:"),GetString(IDS_MM_LAYNUM),i+1);
 	return buf;
 	}
-	 
-TSTR TextureLayers::SubAnimName(int i) {	
+
+
+#if MAX_VERSION_MAJOR < 24
+TSTR TextureLayers::SubAnimName(int i) 
+#else
+TSTR TextureLayers::SubAnimName(int i, bool localized )
+#endif
+{	
 	return GetSubTexmapTVName(i);
 	}
 // JW Code Change: NotifyRefChanged() Signature changed with Max2015+
@@ -1588,7 +1623,12 @@ RefResult TextureLayers::NotifyRefChanged(const Interval& changeInt, RefTargetHa
 		case REFMSG_GET_PARAM_DIM:
 			return REF_STOP; 
 		
-		case REFMSG_GET_PARAM_NAME: {
+#if MAX_VERSION_MAJOR < 24
+		case REFMSG_GET_PARAM_NAME: 
+#else
+		case REFMSG_GET_PARAM_NAME_NONLOCALIZED: 
+#endif
+		{
 			GetParamName *gpn = (GetParamName*)partID;
 			gpn->name= GetSubTexmapSlotName(gpn->index);			
 			return REF_STOP; 

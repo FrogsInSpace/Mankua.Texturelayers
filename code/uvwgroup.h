@@ -78,11 +78,13 @@ class GridMesh : public ReferenceTarget {
 		Interval LocalValidity(TimeValue t);
         int NumSubs()  { return NumRefs();}
         Animatable* SubAnim(int i) {return GetReference(i);}
-        TSTR SubAnimName(int i) {
+
+		TSTR SubAnimName(int i , bool localized=false )
+		{
 			TSTR str;
 			str.printf(GetString(IDS_DC_POINT),i+1);
 			return str;
-			}
+		}
 
         int SubNumToRefNum(int subNum) {return subNum;}
 
@@ -435,7 +437,11 @@ class UVWProyector : public ReferenceTarget {
 		
         int NumSubs();
         Animatable* SubAnim(int i);
-        TSTR SubAnimName(int i);
+#if MAX_VERSION_MAJOR < 24
+		TSTR SubAnimName(int i);
+#else
+		TSTR SubAnimName(int i, bool localized = false);
+#endif
 
 		int	NumParamBlocks() { return 1; }	
 		IParamBlock2* GetParamBlock(int i) { return pblock; }

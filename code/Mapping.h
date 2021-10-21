@@ -365,7 +365,12 @@ friend BOOL CALLBACK FlatMapsDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM
 				
 		// From Animatable
 		void DeleteThis() { delete this; }
+#if MAX_VERSION_MAJOR < 24
 		void GetClassName(TSTR& s) {s=GetString(IDS_TL_MODNAME);}
+#else
+		void GetClassName(TSTR& s,  bool localized ) { s = GetString(IDS_TL_MODNAME); }
+#endif
+
 		virtual Class_ID ClassID() {return MULTIMAP_MOD_CID;}
 		void BeginEditParams( IObjParam  *ip, ULONG flags,Animatable *prev);
 		void EndEditParams( IObjParam *ip,ULONG flags,Animatable *next);
@@ -397,8 +402,10 @@ friend BOOL CALLBACK FlatMapsDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM
 //JW Code Change: GetObjectName singature changed with 3ds Max 2013+
 #if MAX_VERSION_MAJOR < 15
 		TCHAR *GetObjectName() { return GetString(IDS_DC_TEXLAYERS); }
-#else
+#elif MAX_VERSION_MAJOR < 24
 		const TCHAR *GetObjectName() { return GetString(IDS_DC_TEXLAYERS); }
+#else
+		const TCHAR *GetObjectName( bool localized ) { return GetString(IDS_DC_TEXLAYERS); }
 #endif
 		CreateMouseCallBack* GetCreateMouseCallBack() {return NULL;} 
 //		BOOL AssignController(Animatable *control,int subAnim);
@@ -437,7 +444,12 @@ friend BOOL CALLBACK FlatMapsDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM
 		// MAX 3.0
 		int NumSubs() {return uvwProy.Count();}
 		Animatable* SubAnim(int i);
+
+#if MAX_VERSION_MAJOR < 24
 		TSTR SubAnimName(int i);
+#else
+		TSTR SubAnimName(int i, bool localized = false);
+#endif
 
 #ifndef MAX_RELEASE_R9
 		RefTargetHandle Clone(RemapDir& remap = NoRemap());

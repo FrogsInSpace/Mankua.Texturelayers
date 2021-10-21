@@ -27,14 +27,21 @@ class AttMapClassDesc:public ClassDesc2 {
 	int 			IsPublic() { return 1; }
 	void *			Create(BOOL loading) { 	return new AttMap; }
 	const TCHAR *	ClassName() { return GetString(IDS_DC_ATTMAP_CDESC); } // mjm - 2.3.99
+
+#if MAX_VERSION_MAJOR >= 24
+	const MCHAR* ClassDesc::NonLocalizedClassName() { return ClassName(); };
+#endif
+
 	SClass_ID		SuperClassID() { return TEXMAP_CLASS_ID; }
 	Class_ID 		ClassID() { return ATTMAP_CID; }
 	const TCHAR* 	Category() { return TEXMAP_CAT_COLMOD;  }
 
-	const TCHAR*	InternalName() { return _T("TLAttMap"); }	// returns fixed parsable name (scripter-visible name)
+	const TCHAR*		InternalName() { return _T("TLAttMap"); }	// returns fixed parsable name (scripter-visible name)
 	HINSTANCE		HInstance() { return hInstance; }			// returns owning module handle
 	};
+
 static AttMapClassDesc attmapCD;
+
 ClassDesc2* GetAttMapDesc() { return &attmapCD;  }
 
 static HIMAGELIST hAboutImage = NULL;
@@ -742,8 +749,12 @@ void AttMap::SetSubTexmap(int i, Texmap *m) {
 		}	
 
 	}
-
-TSTR AttMap::GetSubTexmapSlotName(int i) {
+#if MAX_VERSION_MAJOR < 24
+TSTR AttMap::GetSubTexmapSlotName(int i ) 
+#else
+TSTR AttMap::GetSubTexmapSlotName(int i , bool localized ) 
+#endif
+{
 	switch(i) {
 		case 0:  return TSTR(GetString(IDS_DS_MAP)); 
 		default: return TSTR(_T(""));
@@ -757,7 +768,12 @@ Animatable* AttMap::SubAnim(int i) {
 		}
 	}
 
-TSTR AttMap::SubAnimName(int i) {
+#if MAX_VERSION_MAJOR < 24
+TSTR AttMap::SubAnimName(int i)
+#else
+TSTR AttMap::SubAnimName(int i, bool localized) 
+#endif
+{
 	switch (i) {
 		case 0: return TSTR(GetString(IDS_TL_PARAMETERS));		
 		default: return GetSubTexmapTVName(i-1);
