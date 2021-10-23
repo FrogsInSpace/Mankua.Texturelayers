@@ -368,7 +368,7 @@ friend BOOL CALLBACK FlatMapsDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM
 #if MAX_VERSION_MAJOR < 24
 		void GetClassName(TSTR& s) {s=GetString(IDS_TL_MODNAME);}
 #else
-		void GetClassName(TSTR& s,  bool localized ) { s = GetString(IDS_TL_MODNAME); }
+		void GetClassName(TSTR& s, bool localized) const { UNUSED_PARAM(localized); s = GetString(IDS_TL_MODNAME); }
 #endif
 
 		virtual Class_ID ClassID() {return MULTIMAP_MOD_CID;}
@@ -405,7 +405,7 @@ friend BOOL CALLBACK FlatMapsDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM
 #elif MAX_VERSION_MAJOR < 24
 		const TCHAR *GetObjectName() { return GetString(IDS_DC_TEXLAYERS); }
 #else
-		const TCHAR *GetObjectName( bool localized ) { return GetString(IDS_DC_TEXLAYERS); }
+		const TCHAR *GetObjectName(bool localized) const { UNUSED_PARAM(localized);  return GetString(IDS_DC_TEXLAYERS); }
 #endif
 		CreateMouseCallBack* GetCreateMouseCallBack() {return NULL;} 
 //		BOOL AssignController(Animatable *control,int subAnim);

@@ -204,7 +204,7 @@ class TextureLayers: public MultiTex
 #if MAX_VERSION_MAJOR < 24
 		void GetClassName(TSTR& s) {s=GetString(IDS_DC_MULTICOMP);}
 #else
-		void GetClassName( TSTR& s, bool localized = false) { s = GetString(IDS_DC_MULTICOMP); };
+		void GetClassName(TSTR& s, bool localized = false) const { UNUSED_PARAM(localized);  s = GetString(IDS_DC_MULTICOMP); };
 #endif
 
 

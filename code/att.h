@@ -151,7 +151,7 @@ class AttMap: public MultiTex {
 #if MAX_VERSION_MAJOR < 24
 		void GetClassName(TSTR& s) { s= GetString(IDS_DC_ATTMAP); }  
 #else
-		void GetClassName(TSTR& s, bool localized = false) { s = GetString(IDS_DC_ATTMAP); }
+		void GetClassName(TSTR& s, bool localized = false) const { UNUSED_PARAM(localized);  s = GetString(IDS_DC_ATTMAP); }
 #endif
 		void DeleteThis() { delete this; }	
 
