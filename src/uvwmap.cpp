@@ -17,7 +17,7 @@
 #include "natural_box.h"
 #include "uv_pelt_dlg.h"
 #include "texlay.h"
-#include "..\..\UVWFrame\code\uvwframe.h"
+#include "..\..\UVWFrame\src\uvwframe.h"
 #include "3d_geom.h"
 #include "load_cb.h"
 #include <vector>

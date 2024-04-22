@@ -758,43 +758,43 @@ END
 // Bitmap
 //
 
-IDB_BACKS               BITMAP                  "back1.bmp"
+IDB_BACKS               BITMAP                  "res/back1.bmp"
 
-IDB_BACKS_MASK          BITMAP                  "back_mas.bmp"
+IDB_BACKS_MASK          BITMAP                  "res/back_mas.bmp"
 
-IDB_UTILETOOL           BITMAP                  "unwrapto.bmp"
+IDB_UTILETOOL           BITMAP                  "res/unwrapto.bmp"
 
-IDB_MASK_UTILETOOL      BITMAP                  "mask_unw.bmp"
+IDB_MASK_UTILETOOL      BITMAP                  "res/mask_unw.bmp"
 
-IDB_MANKUA_LOGO         BITMAP                  "mankua.bmp"
+IDB_MANKUA_LOGO         BITMAP                  "res/mankua.bmp"
 
-IDB_PELT                BITMAP                  "bitmap1.bmp"
+IDB_PELT                BITMAP                  "res/bitmap1.bmp"
 
-IDB_PELT_MASK           BITMAP                  "bmp00002.bmp"
+IDB_PELT_MASK           BITMAP                  "res/bmp00002.bmp"
 
-IDB_BULBS               BITMAP                  "bulbs.bmp"
+IDB_BULBS               BITMAP                  "res/bulbs.bmp"
 
-IDB_BULBS_MASK          BITMAP                  "bulbs_ma.bmp"
+IDB_BULBS_MASK          BITMAP                  "res/bulbs_ma.bmp"
 
-IDB_TL_TOOLBAR          BITMAP                  "bmp00003.bmp"
+IDB_TL_TOOLBAR          BITMAP                  "res/bmp00003.bmp"
 
-IDB_TL_TOOLBAR_MASK     BITMAP                  "bmp00004.bmp"
+IDB_TL_TOOLBAR_MASK     BITMAP                  "res/bmp00004.bmp"
 
-IDB_MAP_TYPES           BITMAP                  "map_type.bmp"
+IDB_MAP_TYPES           BITMAP                  "res/map_type.bmp"
 
-IDB_MAP_TYPES_MASK      BITMAP                  "bmp00005.bmp"
+IDB_MAP_TYPES_MASK      BITMAP                  "res/bmp00005.bmp"
 
-IDB_16BUTS              BITMAP                  "bmp16but.bmp"
+IDB_16BUTS              BITMAP                  "res/bmp16but.bmp"
 
-IDB_16BUTS_MASK         BITMAP                  "bmp00001.bmp"
+IDB_16BUTS_MASK         BITMAP                  "res/bmp00001.bmp"
 
-IDB_TEXLAY_ATT          BITMAP                  "texlay_a.bmp"
+IDB_TEXLAY_ATT          BITMAP                  "res/texlay_a.bmp"
 
-IDB_TEXLAY_ATT_MASK     BITMAP                  "bmp00006.bmp"
+IDB_TEXLAY_ATT_MASK     BITMAP                  "res/bmp00006.bmp"
 
-IDB_DCP                 BITMAP                  "dcp.bmp"
+IDB_DCP                 BITMAP                  "res/dcp.bmp"
 
-IDB_TEXLAY2_ABOUT       BITMAP                  "TexLay2About.bmp"
+IDB_TEXLAY2_ABOUT       BITMAP                  "res/TexLay2About.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -802,23 +802,23 @@ IDB_TEXLAY2_ABOUT       BITMAP                  "TexLay2About.bmp"
 // Cursor
 //
 
-IDC_MOVE_X              CURSOR                  "cur00004.cur"
+IDC_MOVE_X              CURSOR                  "res/cur00004.cur"
 
-IDC_MOVE_Y              CURSOR                  "cursor2.cur"
+IDC_MOVE_Y              CURSOR                  "res/cursor2.cur"
 
-IDC_ZOOM                CURSOR                  "cur00003.cur"
+IDC_ZOOM                CURSOR                  "res/cur00003.cur"
 
-IDC_PAN                 CURSOR                  "cur00005.cur"
+IDC_PAN                 CURSOR                  "res/cur00005.cur"
 
-IDC_ADD_POINT           CURSOR                  "cur00007.cur"
+IDC_ADD_POINT           CURSOR                  "res/cur00007.cur"
 
-IDC_DEL_POINT           CURSOR                  "cur00006.cur"
+IDC_DEL_POINT           CURSOR                  "res/cur00006.cur"
 
-IDC_DRAGCURSOR          CURSOR                  "cursor1.cur"
+IDC_DRAGCURSOR          CURSOR                  "res/cursor1.cur"
 
-IDC_SCALE_X             CURSOR                  "scale_x.cur"
+IDC_SCALE_X             CURSOR                  "res/scale_x.cur"
 
-IDC_SCALE_Y             CURSOR                  "scale_y.cur"
+IDC_SCALE_Y             CURSOR                  "res/scale_y.cur"
 
 
 /////////////////////////////////////////////////////////////////////////////

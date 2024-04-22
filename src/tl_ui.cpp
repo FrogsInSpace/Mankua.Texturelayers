@@ -14,7 +14,7 @@
 #include "meshadj.h"
 #include "common.h"
 #include "texlay.h"
-#include "..\..\UVWFrame\code\uvwframe.h"
+#include "..\..\UVWFrame\src\uvwframe.h"
 #include "3dsmaxport.h"
 
 #define ID_ADD		0x2000

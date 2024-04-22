@@ -30,7 +30,7 @@
 #include "uv_pelt_dlg.h"
 #include "common.h"
 #include "texlay.h"
-#include "..\..\UVWFrame\code\uvwframe.h"
+#include "..\..\UVWFrame\src\uvwframe.h"
 #include "3dsmaxport.h"
 
 #if (MAX_RELEASE >= 4000)
