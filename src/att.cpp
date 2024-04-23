@@ -22,6 +22,8 @@ std::vector<MeshExtraData*> AttMap::mesh_datas;
 
 int numTints = 0;
 
+Interval forever = FOREVER;
+
 class AttMapClassDesc:public ClassDesc2 {
 	public:
 	int 			IsPublic() { return 1; }
@@ -83,7 +85,7 @@ INT_PTR AttMapDlgProc::DlgProc(TimeValue t,IParamMap2 *map,HWND hWnd,UINT msg,WP
 		case WM_PAINT: {
 			PAINTSTRUCT ps;
 			HDC hdc = BeginPaint(hWnd,&ps);
-			atmap->Update(GetCOREInterface()->GetTime(),FOREVER);
+			atmap->Update(GetCOREInterface()->GetTime(), forever);
 			int dc;
 			atmap->pblock->GetValue(attuvwn_type, 0, dc, FOREVER);
 			if (dc != SHOW_CURVE) {

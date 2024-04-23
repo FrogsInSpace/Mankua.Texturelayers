@@ -797,9 +797,11 @@ void PickAcquire::AcquireMapping(
 	TimeValue t = ip->GetTime();
 
 	if (ani && IDC_ACQUIRE_RELTL) {
-		toMod->uvwProy[toMod->current_channel]->ReplaceReference(PBLOCK_REF,fromMod->uvwProy[channel]->pblock->Clone( DefaultRemapDir() ));
+		RemapDir const& pbRemap = DefaultRemapDir();		
+		toMod->uvwProy[toMod->current_channel]->ReplaceReference(PBLOCK_REF,fromMod->uvwProy[channel]->pblock->Clone(const_cast<RemapDir&>(pbRemap )));
 
-		toMod->uvwProy[toMod->current_channel]->ReplaceReference(TMCTRL_REF,fromMod->uvwProy[channel]->tmControl->Clone( DefaultRemapDir() ));
+		RemapDir const& tmRemap = DefaultRemapDir();
+		toMod->uvwProy[toMod->current_channel]->ReplaceReference(TMCTRL_REF,fromMod->uvwProy[channel]->tmControl->Clone(const_cast<RemapDir&>(tmRemap)));
 
 		if (fromMod->uvwProy[channel]->GetMappingType() == MAP_TL_SPLINE) {
 			fromMod->uvwProy[channel]->GetSplineNode();
@@ -808,7 +810,8 @@ void PickAcquire::AcquireMapping(
 				}
 			}
 		if (fromMod->uvwProy[channel]->GetMappingType() == MAP_TL_FFM) {
-			toMod->uvwProy[toMod->current_channel]->ReplaceReference(GRID_REF,fromMod->uvwProy[channel]->gm->Clone());
+			toMod->uvwProy[toMod->current_channel]->ReplaceReference(GRID_REF, CloneRefHierarchy( fromMod->uvwProy[channel]->gm));
+			//JW: toMod->uvwProy[toMod->current_channel]->ReplaceReference(GRID_REF,fromMod->uvwProy[channel]->gm->Clone());
 			}
 
 		toMod->uvwProy[toMod->current_channel]->angleCrv = fromMod->uvwProy[channel]->angleCrv;
@@ -892,7 +895,8 @@ void PickAcquire::AcquireMapping(
 				}
 			}
 		if (fromMod->uvwProy[channel]->GetMappingType() == MAP_TL_FFM) {
-			toMod->uvwProy[channel]->ReplaceReference(GRID_REF,fromMod->uvwProy[channel]->gm->Clone());
+			toMod->uvwProy[channel]->ReplaceReference(GRID_REF, CloneRefHierarchy( fromMod->uvwProy[channel]->gm));
+			//JW: toMod->uvwProy[channel]->ReplaceReference(GRID_REF,fromMod->uvwProy[channel]->gm->Clone());
 			}
 		}
 
@@ -1789,7 +1793,8 @@ void MultiMapMod::CopyLayerToBuffer() {
 
 	uvw_data_buffer->CopyUVWData( md->group_uvw_data[current_channel] );
 
-	uvw_buffer = (UVWProyector*)uvwProy[current_channel]->Clone();
+	uvw_buffer = (UVWProyector*)CloneRefHierarchy(uvwProy[current_channel]);
+	//JW: uvw_buffer = (UVWProyector*)uvwProy[current_channel]->Clone( DefaultRemapDir() );
 
 	copied = current_channel;
 	copy = 1;
@@ -1828,7 +1833,8 @@ BOOL MultiMapMod::PasteBufferToLayer() {
 	theHold.Put( new GroupsTableRestore(this,START_EDIT) );
 	theHold.Put(new GroupsTableRestore(this,PASTE_GROUP));
 
-	uvwProy[current_channel] = (UVWProyector*)uvw_buffer->Clone();
+	uvwProy[current_channel] = (UVWProyector*)CloneRefHierarchy(uvw_buffer);
+	//JW: uvwProy[current_channel] = (UVWProyector*)uvw_buffer->Clone();
 	ReplaceReference( current_channel, uvwProy[current_channel] );
 
 	if ( md->group_uvw_data[current_channel]->CompareFaceSize( uvw_data_buffer ) ) {
@@ -4351,8 +4357,11 @@ int MultiMapMod::HitTest( TimeValue t, INode* inode, int type, int crossing, int
 			SubObjHitList hitList;
 		
 			Mesh &mesh = *((TexLayMCData*)mc->localData)->GetMesh();
+#if MAX_VERSION_MAJOR < 26
 			mesh.faceSel = ((TexLayMCData*)mc->localData)->face_sel[current_channel];
-
+#else
+			mesh.FaceSel() = ((TexLayMCData*)mc->localData)->face_sel[current_channel];
+#endif
 			res = mesh.SubObjectHitTest(gw, gw->getMaterial(), &hr, flags|SUBHIT_FACES|SUBHIT_SELSOLID, hitList);
 
 
@@ -5339,7 +5348,11 @@ TSTR MultiMapMod::BrowseForFileName(BOOL save, BOOL &cancel,int fo) {
 	ofn.nFilterIndex	= 1;
 	ofn.lpstrFile       = fname;
 	ofn.nMaxFile        = 256;    
+#if MAX_RELEASE < 27000
 	ofn.lpstrInitialDir = ip->GetDir(APP_EXPORT_DIR);
+#else
+	ofn.lpstrInitialDir = (ip->GetDir(APP_EXPORT_DIR)).data();
+#endif
 	ofn.Flags           = OFN_HIDEREADONLY|(save? OFN_OVERWRITEPROMPT:(
 							OFN_FILEMUSTEXIST|OFN_PATHMUSTEXIST));
 	ofn.lpstrDefExt     = _T("tl");
@@ -6970,8 +6983,12 @@ void MultiMapMod::LoadUVW() {
 	ofn.hwndOwner       = hwnd_data;
 	ofn.lpstrFilter     = fl;
 	ofn.lpstrFile       = fname;
-	ofn.nMaxFile        = 256;    
+	ofn.nMaxFile        = 256;
+#if MAX_RELEASE < 27000
 	ofn.lpstrInitialDir = ip->GetDir(APP_EXPORT_DIR);
+#else
+	ofn.lpstrInitialDir = (ip->GetDir(APP_EXPORT_DIR)).data();
+#endif
 	ofn.Flags           = OFN_HIDEREADONLY|OFN_FILEMUSTEXIST|OFN_PATHMUSTEXIST;
 	ofn.lpstrDefExt     = _T("uvw");
 	ofn.lpstrTitle      = title;
@@ -7057,7 +7074,11 @@ void MultiMapMod::GetSaveUVWFilename() {
 	ofn.hwndOwner       = GetCOREInterface()->GetMAXHWnd();
 	ofn.lpstrFilter     = fl;
 	ofn.lpstrFile       = save_uvw_fname;
+#if MAX_RELEASE < 27000
 	ofn.lpstrInitialDir = ip->GetDir(APP_EXPORT_DIR);
+#else
+	ofn.lpstrInitialDir = (ip->GetDir(APP_EXPORT_DIR)).data();
+#endif
 	ofn.nMaxFile        = 256;    
 	ofn.Flags           = OFN_HIDEREADONLY|OFN_FILEMUSTEXIST|OFN_PATHMUSTEXIST;
 	ofn.lpstrDefExt     = _T("uvw");

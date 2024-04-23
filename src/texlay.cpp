@@ -230,7 +230,7 @@ class TextureLayers: public MultiTex
 #ifndef MAX_RELEASE_R9
 		RefTargetHandle Clone(RemapDir& remap = NoRemap());
 #else
-		RefTargetHandle Clone(RemapDir& remap = DefaultRemapDir());
+		RefTargetHandle Clone(RemapDir& remap /*= DefaultRemapDir()*/);
 #endif
 
 // JW Code Change: NotifyRefChanged signature changed in 3ds Max 2015+
@@ -577,7 +577,14 @@ void TextureLayersDlg::UpdateSubTexNames()
 
 		Texmap *m = theTex->subTex[i];
 		TSTR nm;
-		if (m) 	nm = m->GetFullName();
+#if MAX_VERSION_MAJOR < 24
+		if (m)
+			nm = m->GetFullName();
+#else
+		if (m)
+			nm = m->GetFullName(false);
+#endif
+
 		else 	nm = GetString(IDS_TL_NONE);
 		TSTR buf;
 		buf.printf(_T("%d:"),i+1);
@@ -624,7 +631,13 @@ void TextureLayersDlg::LoadDialog(BOOL draw) {
 
 		int i;
 
-		for ( i=0; i<min(theTex->subTex.Count(),6); i++) {
+#ifndef NOMINMAX
+		int minTexCount = min(theTex->subTex.Count(), 6);
+#else
+		int minTexCount = std::min(theTex->subTex.Count(), 6);
+#endif
+		for ( i=0; i< minTexCount; i++)
+		{
 			ShowWindow(GetDlgItem(hPanel,mapIDs[i]),SW_SHOW);
 			ShowWindow(GetDlgItem(hPanel,labelIDs[i]),SW_SHOW);
 			ShowWindow(GetDlgItem(hPanel,mapOnIDs[i]),SW_SHOW);

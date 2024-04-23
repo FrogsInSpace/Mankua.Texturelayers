@@ -174,7 +174,7 @@ class AttMap: public MultiTex {
 #ifndef MAX_RELEASE_R9
 		RefTargetHandle Clone(RemapDir& remap = NoRemap());
 #else
-		RefTargetHandle Clone(RemapDir& remap = DefaultRemapDir());
+		RefTargetHandle Clone(RemapDir& remap /*= DefaultRemapDir()*/);
 #endif
 
 // JW Code Change: NotifyRefChanged signature changed in 3ds Max 2015+

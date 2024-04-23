@@ -95,7 +95,7 @@ class GridMesh : public ReferenceTarget {
 #ifndef MAX_RELEASE_R9
 		RefTargetHandle Clone(RemapDir& remap = NoRemap());
 #else
-		RefTargetHandle Clone(RemapDir& remap = DefaultRemapDir());
+		RefTargetHandle Clone(RemapDir& remap /* = DefaultRemapDir() */);
 #endif
 };
 
@@ -457,7 +457,7 @@ class UVWProyector : public ReferenceTarget {
 #ifndef MAX_RELEASE_R9
 		RefTargetHandle Clone(RemapDir& remap = NoRemap());
 #else
-		RefTargetHandle Clone(RemapDir& remap = DefaultRemapDir());
+		RefTargetHandle Clone(RemapDir& remap /*= DefaultRemapDir() */);
 #endif
 	};
 

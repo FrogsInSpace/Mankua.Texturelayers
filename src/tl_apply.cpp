@@ -125,7 +125,11 @@ void MultiMapMod::ModifyObject(TimeValue t, ModContext &mc, ObjectState *os, INo
 			if (ip->GetSubObjectLevel() == SEL_FACES) {
 				md->tipo = IS_MESH;
 				BitArray faceSel = md->face_sel[current_channel];
+#if MAX_VERSION_MAJOR < 26
 				tobj->GetMesh().faceSel = faceSel;
+#else
+				tobj->GetMesh().FaceSel() = faceSel;
+#endif
 				tobj->GetMesh().SetDispFlag(DISP_SELFACES);
 				}
 		}
@@ -632,7 +636,13 @@ void MultiMapMod::ModifyObject(TimeValue t, ModContext &mc, ObjectState *os, INo
 					}
 
 				if ( save_uvw_channel!=-1 ) {
-					if ( save_uvw_channel<=mnMesh.numm ) {
+#if MAX_VERSION_MAJOR < 26
+					if ( save_uvw_channel<=mnMesh.numm ) 
+#else
+					if (save_uvw_channel <= mnMesh.MNum())
+#endif
+					{
+
 						temp_num_v = mnMesh.M(save_uvw_channel)->VNum();
 						temp_num_f = mnMesh.numf;
 

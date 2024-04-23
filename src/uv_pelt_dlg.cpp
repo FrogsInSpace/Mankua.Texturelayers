@@ -600,12 +600,12 @@ void UVPeltDlg::PaintView() {
 
 		// Paint the mesh
 		for ( int i_m=0; i_m<uvwp->masses.Count(); i_m++ ) {
-			Point2 m0_pos = uvwp->masses[i_m]->f_pos;
+			Point2 m0_pos = uvwp->masses[i_m]->f_pos.XY();
 			int num_springs = uvwp->masses[i_m]->springs.Count();
 			for ( int i_s=0; i_s<num_springs; i_s++ ) {
 				if ( uvwp->masses[i_m]->springs[i_s].attached_to_mass ) {
 					int m_id = uvwp->masses[i_m]->springs[i_s].attach_id;
-					Point2 m1_pos = uvwp->masses[m_id]->f_pos;
+					Point2 m1_pos = uvwp->masses[m_id]->f_pos.XY();
 
 					IPoint2 v_m0 = PeltToView( m0_pos );	
 					IPoint2 v_m1 = PeltToView( m1_pos );	
@@ -625,8 +625,8 @@ void UVPeltDlg::PaintView() {
 			FrameSegments * fsi = uvwp->frame_segments[i_p];
 			FrameSegments * fsj = uvwp->frame_segments[j_p];
 			
-			Point2 pi = fsi->start_point;
-			Point2 pj = fsj->start_point;
+			Point2 pi = fsi->start_point.XY();
+			Point2 pj = fsj->start_point.XY();
 
 			IPoint2 vpi = PeltToView(pi);
 			IPoint2 vpj = PeltToView(pj);
@@ -644,7 +644,7 @@ void UVPeltDlg::PaintView() {
 
 		// Paint the points
 		for ( int i_p=0; i_p<uvwp->frame_segments.Count(); i_p++ ) {
-			Point2 p_pt = uvwp->frame_segments[i_p]->start_point;
+			Point2 p_pt = uvwp->frame_segments[i_p]->start_point.XY();
 			IPoint2 v_pt = PeltToView( p_pt );
 
 			if ( uvwp->frame_segments[i_p]->selected ) {
@@ -743,11 +743,11 @@ void UVPeltDlg::ZoomExtents() {
 
 	Box2D box;
 	for ( int i_fs=0; i_fs<uvwp->frame_segments.Count(); i_fs++ ) {
-		Point2 p = uvwp->frame_segments[i_fs]->start_point;
+		Point2 p = uvwp->frame_segments[i_fs]->start_point.XY();
 		box += p;
 		}
 	for ( int i_m=0; i_m<uvwp->masses.Count(); i_m++ ) {
-		Point2 p = uvwp->masses[i_m]->f_pos;
+		Point2 p = uvwp->masses[i_m]->f_pos.XY();
 		box += p;
 		}
 

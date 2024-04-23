@@ -169,6 +169,7 @@ Control *GridMesh::GetVtCtrl(int i) {return vtCtrl[i]; }
 
 void GridMesh::PlugControllers(TimeValue t) {
 	BOOL notify=FALSE;
+	Point3 tmpP3;
 	// Plug-in controllers for selected points without controllers
 	// if we're animating
 	if (Animating() && t!=0) {
@@ -177,8 +178,9 @@ void GridMesh::PlugControllers(TimeValue t) {
 		for (int i=0; i<vtCtrl.Count(); i++) {		
 			if (sel[i] && !GetVtCtrl(i)) {
 				ReplaceReference(i,NewDefaultPoint3Controller()); 				
-				theHold.Suspend();				
-				GetVtCtrl(i)->SetValue(0,&GetVert(i),TRUE,CTRL_ABSOLUTE);
+				theHold.Suspend();		
+				tmpP3 = GetVert(i);
+				GetVtCtrl(i)->SetValue(0,&tmpP3,TRUE,CTRL_ABSOLUTE);
 				theHold.Resume();
 				notify = TRUE;
 				}			
@@ -4538,10 +4540,14 @@ void UVWProyector::CopyUVW(UVWProyector * uvProy) {
 	int i,j;
 
 	// Copy References
-	ReplaceReference(PBLOCK_REF,uvProy->pblock->Clone( DefaultRemapDir() ));
-	ReplaceReference(TMCTRL_REF,uvProy->tmControl->Clone( DefaultRemapDir() ));
+	ReplaceReference(PBLOCK_REF,CloneRefHierarchy( uvProy->pblock));
+	//JW: ReplaceReference(PBLOCK_REF,uvProy->pblock->Clone(DefaultRemapDir()));
+
+	ReplaceReference(TMCTRL_REF, CloneRefHierarchy( uvProy->tmControl));
+	//JW: ReplaceReference(TMCTRL_REF,uvProy->tmControl->Clone(DefaultRemapDir()));
 	ReplaceReference(SPLINE_REF,uvProy->spline);
-	ReplaceReference(GRID_REF,uvProy->gm->Clone());
+	ReplaceReference(GRID_REF,CloneRefHierarchy( uvProy->gm));
+	//JW: ReplaceReference(GRID_REF,uvProy->gm->Clone());
 
 	// Copy Spline Mapping Curves
 	angleCrv = uvProy->angleCrv;
@@ -6298,7 +6304,7 @@ void UVWProyector::PeltApplyUV( TimeValue t, MNMesh * aux_mesh, PolyUVWData * uv
 BOOL UVWProyector::PeltHitTest(Box2D box, Tab<int> &hits, BOOL selOnly) {
 	for ( int i=0; i<frame_segments.Count(); i++) {
 
-		Point2 pt = frame_segments[i]->start_point;
+		Point2 pt = frame_segments[i]->start_point.XY();
 
 		if ( selOnly && !frame_segments[i]->selected ) continue;
 
@@ -6591,8 +6597,8 @@ BOOL UVWProyector::PeltHitSubPoint(Box2D box, int &fs, int &bv) {
 		FrameSegments * fsi = frame_segments[i];
 		FrameSegments * fsj = frame_segments[j];
 
-		Point2 pti = fsi->start_point;
-		Point2 ptj = fsj->start_point;
+		Point2 pti = fsi->start_point.XY();
+		Point2 ptj = fsj->start_point.XY();
 
 		for ( int i_pb=1; i_pb<fsi->border_vert.Count(); i_pb++ ) {
 			Point2 pt = pti + fsi->position[i_pb] * ( ptj - pti );
@@ -6888,7 +6894,11 @@ TSTR UVWProyector::PeltBrowseForFileName(BOOL save, BOOL &cancel) {
 	ofn.nFilterIndex	= 1;
 	ofn.lpstrFile       = fname;
 	ofn.nMaxFile        = 256;    
+#if MAX_RELEASE < 27000
 	ofn.lpstrInitialDir = tl->ip->GetDir(APP_EXPORT_DIR);
+#else
+	ofn.lpstrInitialDir = (tl->ip->GetDir(APP_EXPORT_DIR)).data();
+#endif
 	ofn.Flags           = OFN_HIDEREADONLY|(save? OFN_OVERWRITEPROMPT:(
 							OFN_FILEMUSTEXIST|OFN_PATHMUSTEXIST));
 	ofn.lpstrDefExt     = _T("upf");

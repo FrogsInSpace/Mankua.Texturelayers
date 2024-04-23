@@ -432,7 +432,7 @@ float ControlCurve::GetValue(float u) {
 		}
 	if (u == 0.0f) u = 0.000001f;
 	if (u>1.0f) {
-		Point3 vec = GetIn(NumPoints()-1) - GetPoint(NumPoints()-1);
+		Point2 vec = GetIn(NumPoints()-1) - GetPoint(NumPoints()-1);
 		if (vec.x == 0.0f || vec.y == 0.0f) return GetPoint(NumPoints()-1).y;
 		return GetPoint(NumPoints()-1).y + (u - 1.0f) * vec.y/vec.x;
 		}
